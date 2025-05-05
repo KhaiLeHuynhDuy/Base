@@ -39,16 +39,10 @@ public class Ayaka extends Boss {
         } else {
             Service.gI().dropItemMap(this.zone, new ItemMap(zone, Manager.itemIds_NR_SB[randomNR], 1, this.location.x, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
         }
-        if (Util.isTrue(9, 10)) {
-            Service.gI().dropItemMap(this.zone, new ItemMap(zone, 987, 1, this.location.x, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
-//        } else {
-//            Service.gI().dropItemMap(this.zone, new ItemMap(zone, 462, 1, this.location.x, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
-        }
+            Service.gI().dropItemMap(this.zone, new ItemMap(zone, 1664, 1, this.location.x, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
+            Service.gI().dropItemMap(this.zone, new ItemMap(zone, 1664, 1, this.location.x, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id)); 
         if (Util.isTrue(1, 10)) {
             Service.gI().dropItemMap(this.zone, new ItemMap(zone, Manager.itemIds_DVT[randomDVT], Util.nextInt(1, 20), this.location.x + 6, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
-//        } else {
-//            Service.gI().dropItemMap(this.zone, new ItemMap(zone, Manager.itemIds_tinhthach[randomTT], 1, this.location.x + 6, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
-
         }
         TaskService.gI().checkDoneTaskKillBoss(pl, this);
         if (Util.isTrue(1, 10)) {
@@ -56,7 +50,8 @@ public class Ayaka extends Boss {
         }
 
     }
- @Override
+
+    @Override
     public void joinMap() {
         super.joinMap();
         st = System.currentTimeMillis();
@@ -77,7 +72,8 @@ public class Ayaka extends Boss {
             this.changeStatus(BossStatus.LEAVE_MAP);
         }
     }
-     @Override
+
+    @Override
     public double injured(Player plAtt, double damage, boolean piercing, boolean isMobAttack) {
         if (!this.isDie()) {
             if (!piercing && Util.isTrue(this.nPoint.tlNeDon, 1000)) {
@@ -85,7 +81,7 @@ public class Ayaka extends Boss {
                 return 0;
             }
             damage = Math.max(0, 10); // Đảm bảo sát thương không âm
-           //damage = this.nPoint.subDameInjureWithDeff(damage);
+            //damage = this.nPoint.subDameInjureWithDeff(damage);
             if (plAtt != null && !piercing && effectSkill.isShielding) {
                 if (damage > nPoint.hpMax) {
                     EffectSkillService.gI().breakShield(this);
@@ -102,6 +98,7 @@ public class Ayaka extends Boss {
             return 0;
         }
     }
+
     @Override
     public void wakeupAnotherBossWhenDisappear() {
         if (this.getParentBoss() == null) {
@@ -113,7 +110,7 @@ public class Ayaka extends Boss {
                 return;
             }
         }
-        
+
     }
 
 }

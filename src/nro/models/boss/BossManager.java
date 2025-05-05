@@ -142,7 +142,7 @@ public class BossManager {
                     case BossType.KUKU:
                     case BossType.MAP_DAU_DINH:
                     case BossType.RAMBO:
-                        for (int j = 0; j < 3; j++) {
+                        for (int j = 0; j < 1; j++) {
                             createBoss(bossTypes[i]);
                             Thread.sleep(1000);
                         }
