@@ -18,12 +18,12 @@ import nro.server.Manager;
 import nro.services.EffectSkillService;
 import nro.utils.Logger;
 
-
 public class Xiao extends Boss {
 
     public Xiao() throws Exception {
         super(BossType.XIAO, BossesData.XIAO);
     }
+
     @Override
     public void reward(Player pl) {
         pl.event.addEventPointBoss(1);
@@ -45,8 +45,8 @@ public class Xiao extends Boss {
 //            Service.gI().dropItemMap(this.zone, new ItemMap(zone, 462, 1, this.location.x, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
 //        
         }
-           Service.gI().dropItemMap(this.zone, new ItemMap(zone, 1664, 1, this.location.x, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
-            Service.gI().dropItemMap(this.zone, new ItemMap(zone, 1664, 1, this.location.x, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id)); 
+        Service.gI().dropItemMap(this.zone, new ItemMap(zone, 1664, 1, this.location.x, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
+        Service.gI().dropItemMap(this.zone, new ItemMap(zone, 1664, 1, this.location.x, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
         if (Util.isTrue(1, 10)) {
             Service.gI().dropItemMap(this.zone, new ItemMap(zone, Manager.itemIds_DVT[randomDVT], Util.nextInt(1, 20), this.location.x + 6, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
 //        } else {
@@ -59,7 +59,8 @@ public class Xiao extends Boss {
         }
 
     }
-  @Override
+
+    @Override
     public void joinMap() {
         super.joinMap();
         st = System.currentTimeMillis();
@@ -80,7 +81,8 @@ public class Xiao extends Boss {
             this.changeStatus(BossStatus.LEAVE_MAP);
         }
     }
-     @Override
+
+    @Override
     public double injured(Player plAtt, double damage, boolean piercing, boolean isMobAttack) {
         if (!this.isDie()) {
             if (!piercing && Util.isTrue(this.nPoint.tlNeDon, 1000)) {
@@ -88,7 +90,7 @@ public class Xiao extends Boss {
                 return 0;
             }
             damage = Math.max(0, 10); // Đảm bảo sát thương không âm
-           //damage = this.nPoint.subDameInjureWithDeff(damage);
+            //damage = this.nPoint.subDameInjureWithDeff(damage);
             if (plAtt != null && !piercing && effectSkill.isShielding) {
                 if (damage > nPoint.hpMax) {
                     EffectSkillService.gI().breakShield(this);
@@ -105,19 +107,19 @@ public class Xiao extends Boss {
             return 0;
         }
     }
-    @Override
-    public void wakeupAnotherBossWhenDisappear() {
-        if (this.getParentBoss() == null) {
-            return;
-        }
-        for (Boss boss : this.getParentBoss().getBossAppearTogether()[this.getParentBoss().getCurrentLevel()]) {
-            if (boss.id == BossType.HUTAO && boss.isDie()) {
-//                this.parentBoss.changeToTypePK();
-                return;
-            }
-        }
-        
-    }
-  
-}
+//
+//    @Override
+//    public void wakeupAnotherBossWhenDisappear() {
+//        if (this.getParentBoss() == null) {
+//            return;
+//        }
+//        for (Boss boss : this.getParentBoss().getBossAppearTogether()[this.getParentBoss().getCurrentLevel()]) {
+//            if (boss.id == BossType.HUTAO && boss.isDie()) {
+////                this.parentBoss.changeToTypePK();
+//                return;
+//            }
+//        }
+//
+//    }
 
+}

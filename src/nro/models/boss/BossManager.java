@@ -495,9 +495,9 @@ public class BossManager {
     }
 
     public void showListBoss(Player player) {
-        if (!player.isAdmin()) {
-            return;
-        }
+//        if (!player.isAdmin()) {
+//            return;
+//        }
         Message msg;
         try {
             msg = new Message(-96);

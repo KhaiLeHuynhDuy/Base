@@ -47,8 +47,8 @@ public class Hutao extends Boss {
 //            Service.gI().dropItemMap(this.zone, new ItemMap(zone, 462, 1, this.location.x, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
 //        
         }
-           Service.gI().dropItemMap(this.zone, new ItemMap(zone, 1664, 1, this.location.x, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
-            Service.gI().dropItemMap(this.zone, new ItemMap(zone, 1664, 1, this.location.x, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id)); 
+        Service.gI().dropItemMap(this.zone, new ItemMap(zone, 1664, 1, this.location.x, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
+        Service.gI().dropItemMap(this.zone, new ItemMap(zone, 1664, 1, this.location.x, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
         if (Util.isTrue(1, 10)) {
             Service.gI().dropItemMap(this.zone, new ItemMap(zone, Manager.itemIds_DVT[randomDVT], Util.nextInt(1, 20), this.location.x + 6, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
 //        } else {
@@ -110,17 +110,17 @@ public class Hutao extends Boss {
         }
     }
 
-    @Override
-    public void wakeupAnotherBossWhenDisappear() {
-        if (this.getParentBoss() == null) {
-            return;
-        }
-        for (Boss boss : this.getParentBoss().getBossAppearTogether()[this.getParentBoss().getCurrentLevel()]) {
-            if (boss.id == BossType.HUTAO && boss.isDie()) {
-//                this.parentBoss.changeToTypePK();
-                return;
-            }
-        }
-
-    }
+//    @Override
+//    public void wakeupAnotherBossWhenDisappear() {
+//        if (this.getParentBoss() == null) {
+//            return;
+//        }
+//        for (Boss boss : this.getParentBoss().getBossAppearTogether()[this.getParentBoss().getCurrentLevel()]) {
+//            if (boss.id == BossType.HUTAO && boss.isDie()) {
+////                this.parentBoss.changeToTypePK();
+//                return;
+//            }
+//        }
+//
+//    }
 }

@@ -307,7 +307,6 @@ public class Service {
 //            e.printStackTrace();
 //        }
 //    }
-
     public void showListTopDauNhanh(Player player, List<TOP> tops, byte isPVP, int start) {
         Message msg;
         try {
@@ -364,7 +363,7 @@ public class Service {
                 msg.writer().writeShort(pl.getBody());
                 msg.writer().writeShort(pl.getLeg());
                 msg.writer().writeUTF(pl.name);
-                msg.writer().writeUTF(top.getInfo1());
+                //msg.writer().writeUTF(top.getInfo1());
                 msg.writer().writeUTF(top.getInfo2());
             }
             player.sendMessage(msg);
@@ -924,7 +923,19 @@ public class Service {
             Logger.error("player null in Service_chat");
             return;
         }
-
+        if (text.startsWith("dokiep")) {
+            String[] parts = text.split(" ");
+            int times = 1; // Mặc định 1 lần nếu không có số
+            if (parts.length > 1) {
+                try {
+                    times = Integer.parseInt(parts[1]);
+                    times = Math.min(times, 1000); // Giới hạn tối đa 1000 lần
+                } catch (NumberFormatException e) {
+                    // Bỏ qua lỗi parse số
+                }
+            }
+            DoKiepService.gI().process(player, times);
+        }
         if (text.equals("tt")) {
             String dotPhaText;
             if (player.dotpha == 0) {
@@ -937,18 +948,15 @@ public class Service {
                 dotPhaText = "Không xác định"; // Trường hợp giá trị không hợp lệ
             }
             String capTTText;
-            if(player.capTT ==0){
+            if (player.capTT == 0) {
                 capTTText = "Người Phàm";
-            }
-            else if(player.capTT == 1){
+            } else if (player.capTT == 1) {
                 capTTText = "Luyện Khí";
-            }
-            else if(player.capTT == 2 && player.isUseTrucCoDan == true){
+            } else if (player.capTT == 2 && player.isUseTrucCoDan == true) {
                 capTTText = "Thiên Đạo Trúc Cơ";
-            }
-            else if(player.capTT == 2){
+            } else if (player.capTT == 2) {
                 capTTText = "Trúc Cơ";
-            }else {
+            } else {
                 capTTText = "Không xác định"; // Trường hợp giá trị không hợp lệ
             }
             sendThongBaoOK(player, "Thông tin nhân vật: " + player.name
@@ -1031,9 +1039,8 @@ public class Service {
                     PlayerService.gI().sendInfoHpMp(player);
                     sendThongBao(player, "Quyền năng trị liệu\n");
                     return;
-                    
-                    //khai comment
-                    
+
+                //khai comment
 //                case "b": {
 //                    Message msg;
 //                    try {

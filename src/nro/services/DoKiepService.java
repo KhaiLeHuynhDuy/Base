@@ -11,23 +11,24 @@ public class DoKiepService {
 
     private static DoKiepService instance;
     private final Random rand;
-    private static final int MAX_CAPTT = 5; // Cảnh giới tối đa
+    private static final int MAX_CAPTT = 5;
 
-    // Cấu hình vàng và tỷ lệ thành công theo từng cấp độ (capTT + 1)
     private static final long[] GOLD_REQUIRE = {
+        50_000_000,
         100_000_000, // Cấp 1
-        200_000_000, // Cấp 2 
+        200_000_000, // Cấp 2
         300_000_000, // Cấp 3
         400_000_000, // Cấp 4
         500_000_000 // Cấp 5
     };
 
     private static final int[] SUCCESS_RATE = {
-        60, // 90% cho cấp 1
-        50, // 70% cho cấp 2
-        40, // 50% cho cấp 3
-        30, // 30% cho cấp 4
-        10 // 10% cho cấp 5
+        15,
+        10, // 90% cho cấp 1
+        5, // 70% cho cấp 2
+        2, // 50% cho cấp 3
+        5, // 30% cho cấp 4
+        1 // 10% cho cấp 5
     };
 
     public static DoKiepService gI() {
@@ -41,72 +42,71 @@ public class DoKiepService {
         rand = new Random();
     }
 
-    public void process(Player player) {
+    public void process(Player player, int times) {
         try {
-            // Đã đạt cảnh giới tối đa
             if (player.capTT >= MAX_CAPTT) {
-                sendError(player, "Bạn đã đạt cảnh giới tối đa");
+                Service.gI().sendThongBao(player, "Bạn đã đạt cảnh giới tối đa");
                 return;
             }
 
-            // Tính toán yêu cầu cho cấp tiếp theo
-            int targetLevel = player.capTT + 1;
-            long requiredGold = GOLD_REQUIRE[targetLevel - 1];
-            int successRate = SUCCESS_RATE[targetLevel - 1];
+            int initialLevel = player.capTT;
+            long totalGoldUsed = 0;
+            int successCount = 0;
 
-            // Kiểm tra vàng
-            if (player.inventory.gold < requiredGold) {
-                sendError(player, "Cần " + requiredGold + " vàng để độ kiếp");
-                return;
+            for (int i = 0; i < times; i++) {
+                // Kiểm tra điều kiện mỗi lần lặp
+                if (player.capTT >= MAX_CAPTT) {
+                    break;
+                }
+
+                int targetLevel = player.capTT + 1;
+                long requiredGold = GOLD_REQUIRE[targetLevel - 1];
+
+                // Kiểm tra vàng
+                if (player.inventory.gold < requiredGold) {
+                    Service.gI().sendThongBao(player, "Hết vàng sau " + i + " lần độ kiếp");
+                    break;
+                }
+
+                // Trừ vàng trước khi check tỷ lệ
+                player.inventory.gold -= requiredGold;
+                totalGoldUsed += requiredGold;
+
+                // Cập nhật vàng ngay lập tức
+                InventoryServiceNew.gI().sendItemBags(player);
+
+                // Tính toán thành công
+                boolean success = rand.nextInt(100) < SUCCESS_RATE[targetLevel - 1];
+
+                if (success) {
+                    player.capTT = (byte) targetLevel;
+                    successCount = i;
+                    PlayerDAO.updatePlayer(player);
+                    InventoryServiceNew.gI().sendItemBags(player);
+                    break;
+                }
+
+                // Nếu đạt max level thì dừng
+                if (player.capTT >= MAX_CAPTT) {
+                    break;
+                }
             }
 
-            // Trừ vàng
-            player.inventory.gold -= requiredGold;
+            // Thông báo tổng kết
+            String resultMsg = String.format("Kết quả độ kiếp %d lần:\n"
+                    + "- Thăng cấp: %d ➔ %d\n"
+                    + "- Tổng hao phí: %,d vàng\n",
+                    times, initialLevel, player.capTT, totalGoldUsed);
 
-            // Tính toán thành công
-            boolean success = rand.nextInt(100) < successRate;
-
-            // Cập nhật cảnh giới
-            if (success) {
-                player.capTT = (byte) targetLevel;
-            }
-
-            // Lưu vào DB
-            PlayerDAO.updatePlayer(player);
-
-            // Gửi kết quả
-            sendResult(player, success, requiredGold);
+            Service.gI().sendThongBao(player, resultMsg);
 
         } catch (Exception e) {
             Logger.error("Lỗi độ kiếp: " + e.getMessage());
-            sendError(player, "Lỗi hệ thống");
-        }
-    }
-
-    private void sendResult(Player player, boolean success, long goldUsed) {
-        Message msg = new Message(71);
-        try {
-            msg.writer().writeBoolean(success);
-            msg.writer().writeLong(player.inventory.gold);
-            msg.writer().writeByte(player.capTT);
-            player.sendMessage(msg);
-        } catch (IOException e) {
-            Logger.error("Lỗi gửi kết quả độ kiếp: " + e.getMessage());
+            Service.gI().sendThongBao(player, "Có lỗi xảy ra, vui lòng thử lại.");
         } finally {
-            msg.cleanup(); // Đảm bảo dọn dẹp tài nguyên
-        }
-    }
-
-    private void sendError(Player player, String message) {
-        Message msg = new Message(71);
-        try {
-            msg.writer().writeBoolean(false);
-            msg.writer().writeUTF(message);
-            player.sendMessage(msg);
-        } catch (IOException e) {
-            Logger.error("Lỗi gửi thông báo lỗi: " + e.getMessage());
-        } finally {
-            msg.cleanup();
+            // Đảm bảo cập nhật UI lần cuối
+            InventoryServiceNew.gI().sendItemBags(player);
+            Service.gI().sendMoney(player);
         }
     }
 }

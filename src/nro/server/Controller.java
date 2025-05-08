@@ -248,9 +248,9 @@ public class Controller implements IMessageHandler {
                         }
                     }
                     break;
-                case 71:
-                    DoKiepService.gI().process(player);
-                    break;
+//                case 71:
+//                    DoKiepService.gI().process(player);
+//                    break;
                 case 42:
                     Service.gI().regisAccount(_session, _msg);
                     break;
