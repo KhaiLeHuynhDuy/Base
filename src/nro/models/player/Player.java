@@ -209,7 +209,7 @@ public class Player {
     public int ThoiVangChallenge;
 
     public byte capCS;
-    public byte capTT;
+    public byte capTuTien;
     public int dotpha;
     public transient boolean isProcessing = false; // Tạm thời, không ghi vào DB
 

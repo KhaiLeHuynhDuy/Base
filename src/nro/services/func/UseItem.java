@@ -1583,218 +1583,258 @@ public class UseItem {
                             break;
                         case 1664: // Hoàng Cuc Đan
                         {
-                            int damegIncrease = 10_000;
-                            int hpMpIncrease = 30_000;
-                            int maxDameg = 3_600_000;
-                            int maxHpMp = maxDameg * 3;
-                            boolean avaiable = true;
-                            // Kiểm tra giới hạn hiện tại
-                            boolean damegMaxed = pl.nPoint.dameg >= maxDameg;
-                            boolean hpMpMaxed = pl.nPoint.hpg >= maxHpMp && pl.nPoint.mpg >= maxHpMp;
+                            int requiredCap = 1;
+                            if (pl.capTuTien != requiredCap) {
+                                Service.gI().sendThongBao(pl, "Cảnh giới chưa đạt yêu cầu để sử dụng Hoàng Cúc Đan");
+                                break;
+                            } else {
+                                int damegIncrease = 10_000;
+                                int hpMpIncrease = 30_000;
+                                int maxDameg = 3_600_000;
+                                int maxHpMp = maxDameg * 3;
+                                boolean avaiable = true;
+                                // Kiểm tra giới hạn hiện tại
+                                boolean damegMaxed = pl.nPoint.dameg >= maxDameg;
+                                boolean hpMpMaxed = pl.nPoint.hpg >= maxHpMp && pl.nPoint.mpg >= maxHpMp;
 
-                            if (damegMaxed && hpMpMaxed) {
-                                Service.gI().sendThongBao(pl, "Đã đạt giới hạn, không thể sử dụng vật phẩm");
-                                avaiable = false;
+                                if (damegMaxed && hpMpMaxed) {
+                                    Service.gI().sendThongBao(pl, "Đã đạt giới hạn, không thể sử dụng vật phẩm");
+                                    avaiable = false;
+                                    break;
+                                }
+
+                                // Tăng chỉ số nếu chưa đạt giới hạn
+                                if (avaiable) {
+                                    if (!damegMaxed) {
+                                        pl.nPoint.dameg = Math.min(pl.nPoint.dameg + damegIncrease, maxDameg);
+                                    }
+                                    if (!hpMpMaxed) {
+                                        pl.nPoint.hpg = Math.min(pl.nPoint.hpg + hpMpIncrease, maxHpMp);
+                                        pl.nPoint.mpg = Math.min(pl.nPoint.mpg + hpMpIncrease, maxHpMp);
+                                    }
+                                    // Cập nhật trạng thái
+                                    Service.gI().point(pl);
+                                    InventoryServiceNew.gI().subQuantityItemsBag(pl, item, 1);
+                                    InventoryServiceNew.gI().sendItemBags(pl);
+                                    Service.gI().sendThongBao(pl, "Bạn nhận được SD, HP và KI");
+                                }
                                 break;
                             }
-
-                            // Tăng chỉ số nếu chưa đạt giới hạn
-                            if (avaiable) {
-                                if (!damegMaxed) {
-                                    pl.nPoint.dameg = Math.min(pl.nPoint.dameg + damegIncrease, maxDameg);
-                                }
-                                if (!hpMpMaxed) {
-                                    pl.nPoint.hpg = Math.min(pl.nPoint.hpg + hpMpIncrease, maxHpMp);
-                                    pl.nPoint.mpg = Math.min(pl.nPoint.mpg + hpMpIncrease, maxHpMp);
-                                }
-                                // Cập nhật trạng thái
-                                Service.gI().point(pl);
-                                InventoryServiceNew.gI().subQuantityItemsBag(pl, item, 1);
-                                InventoryServiceNew.gI().sendItemBags(pl);
-                                Service.gI().sendThongBao(pl, "Bạn nhận được SD, HP và KI");
-                            }
-
-                            break;
                         }
                         case 1666: // Trúc Cơ Đan
                         {
-
-                            int requiredDame = 3_600_000;
-                            int requiredHpKi = requiredDame * 3;
-
-                            int damegIncrease = 1_000_000;
-                            int hpMpIncrease = damegIncrease * 3;
-
-                            int maxDameg = 4_600_000;
-                            int maxHpMp = maxDameg * 3;
-                            boolean avaiable = true;
-
-                            // Kiểm tra nếu chưa đạt điều kiện đột phá
-                            boolean notEligible = pl.nPoint.dameg < requiredDame
-                                    || pl.nPoint.hpg < requiredHpKi
-                                    || pl.nPoint.mpg < requiredHpKi;
-
-                            if (notEligible) {
-                                avaiable = false;
-                                Service.gI().sendThongBao(pl, "Chưa xong luyện khí mà đòi trúc cơ à mày !!!");
+                            int requiredCap = 1;
+                            if (pl.capTuTien != requiredCap) {
+                                Service.gI().sendThongBao(pl, "Cảnh giới chưa đạt yêu cầu để sử dụng Trúc Cơ Đan");
                                 break;
-                            }
+                            } else {
+                                int requiredDame = 3_600_000;
+                                int requiredHpKi = requiredDame * 3;
 
-                            // Kiểm tra nếu đã vượt ngưỡng yêu cầu
-                            boolean alreadyBeyond = pl.nPoint.dameg >= requiredDame
-                                    || pl.nPoint.hpg >= requiredHpKi
-                                    || pl.nPoint.mpg >= requiredHpKi;
+                                int damegIncrease = 1_000_000;
+                                int hpMpIncrease = damegIncrease * 3;
 
-                            if (alreadyBeyond) {
-                                avaiable = false;
-                                Service.gI().sendThongBao(pl, "Mạnh rồi trúc cơ gì nữa !!!");
-                                break;
-                            }
-                            if (avaiable) {
+                                int maxDameg = 4_600_000;
+                                int maxHpMp = maxDameg * 3;
+                                boolean avaiable = true;
 
-                                // Nếu đủ điều kiện, tiến hành đột phá Trúc Cơ
-                                pl.nPoint.dameg = Math.min(pl.nPoint.dameg + damegIncrease, maxDameg);
-                                pl.nPoint.hpg = Math.min(pl.nPoint.hpg + hpMpIncrease, maxHpMp);
-                                pl.nPoint.mpg = Math.min(pl.nPoint.mpg + hpMpIncrease, maxHpMp);
-                                pl.isUseTrucCoDan = true;
-                                Service.gI().point(pl);
-                                Service.gI().sendThongBao(pl, "Cảnh giới của bạn đã hoàn mỹ, lần tiếp theo đột phá vì Thiên Đạo Trúc Cơ");
+                                // Kiểm tra nếu chưa đạt điều kiện đột phá
+                                boolean notEligible = pl.nPoint.dameg < requiredDame
+                                        || pl.nPoint.hpg < requiredHpKi
+                                        || pl.nPoint.mpg < requiredHpKi;
 
-                                // Trừ vật phẩm
-                                InventoryServiceNew.gI().subQuantityItemsBag(pl, item, 1);
-                                InventoryServiceNew.gI().sendItemBags(pl);
-                                break;
+                                if (notEligible) {
+                                    avaiable = false;
+                                    Service.gI().sendThongBao(pl, "Chưa xong luyện khí mà đòi trúc cơ à mày !!!");
+                                    break;
+                                }
+
+                                // Kiểm tra nếu đã vượt ngưỡng yêu cầu
+                                boolean alreadyBeyond = pl.nPoint.dameg >= requiredDame
+                                        || pl.nPoint.hpg >= requiredHpKi
+                                        || pl.nPoint.mpg >= requiredHpKi;
+
+                                if (alreadyBeyond) {
+                                    avaiable = false;
+                                    Service.gI().sendThongBao(pl, "Mạnh rồi trúc cơ gì nữa !!!");
+                                    break;
+                                }
+                                if (avaiable) {
+
+                                    // Nếu đủ điều kiện, tiến hành đột phá Trúc Cơ
+                                    pl.nPoint.dameg = Math.min(pl.nPoint.dameg + damegIncrease, maxDameg);
+                                    pl.nPoint.hpg = Math.min(pl.nPoint.hpg + hpMpIncrease, maxHpMp);
+                                    pl.nPoint.mpg = Math.min(pl.nPoint.mpg + hpMpIncrease, maxHpMp);
+                                    pl.isUseTrucCoDan = true;
+                                    Service.gI().point(pl);
+                                    Service.gI().sendThongBao(pl, "Cảnh giới của bạn đã hoàn mỹ, lần tiếp theo đột phá vì Thiên Đạo Trúc Cơ");
+
+                                    // Trừ vật phẩm
+                                    InventoryServiceNew.gI().subQuantityItemsBag(pl, item, 1);
+                                    InventoryServiceNew.gI().sendItemBags(pl);
+                                    break;
+                                }
                             }
                         }
                         case 1665:// truc co so ky
                         {
-                            int requiredDame = 4_600_000;
-                            int requiredHpKi = requiredDame * 3;
-
-                            int damegIncrease = 50_000;
-                            int hpMpIncrease = damegIncrease * 3;
-
-                            int maxDameg;
-                            int maxHpMp;
-                            if (pl.isUseTrucCoDan) {
-                                maxDameg = 7_000_000;
-                                maxHpMp = maxDameg * 3;
+                            int requiredCap = 2;
+                            if (pl.capTuTien != requiredCap) {
+                                Service.gI().sendThongBao(pl, "Cảnh giới chưa đạt yêu cầu để sử dụng Long Tủy Đan");
+                                break;
                             } else {
-                                maxDameg = 6_000_000;
-                                maxHpMp = maxDameg * 3;
-                            }
-                            boolean notEligible = pl.nPoint.dameg < requiredDame
-                                    || pl.nPoint.hpg < requiredHpKi
-                                    || pl.nPoint.mpg < requiredHpKi;
+                                int requiredDame = 4_600_000;
+                                int requiredHpKi = requiredDame * 3;
 
-                            if (notEligible) {
-                                Service.gI().sendThongBao(pl, "Éo dùng được đâu em, lo mà về tu luyện tiếp !!!");
+                                int damegIncrease = 50_000;
+                                int hpMpIncrease = damegIncrease * 3;
+
+                                int maxDameg;
+                                int maxHpMp;
+                                if (pl.isUseTrucCoDan) {
+                                    maxDameg = 7_000_000;
+                                    maxHpMp = maxDameg * 3;
+                                } else {
+                                    maxDameg = 6_000_000;
+                                    maxHpMp = maxDameg * 3;
+                                }
+                                boolean notEligible = pl.nPoint.dameg < requiredDame
+                                        || pl.nPoint.hpg < requiredHpKi
+                                        || pl.nPoint.mpg < requiredHpKi;
+
+                                if (notEligible) {
+                                    Service.gI().sendThongBao(pl, "Éo dùng được đâu em, lo mà về tu luyện tiếp !!!");
+                                    break;
+                                }
+                                // Kiểm tra nếu đã vượt ngưỡng yêu cầu
+                                boolean alreadyBeyond = pl.nPoint.dameg >= maxDameg
+                                        || pl.nPoint.hpg >= maxHpMp
+                                        || pl.nPoint.mpg >= maxHpMp;
+
+                                if (alreadyBeyond) {
+                                    Service.gI().sendThongBao(pl, "Mạnh rồi !!!");
+                                    break;
+                                }
+                                pl.nPoint.dameg = Math.min(pl.nPoint.dameg + damegIncrease, maxDameg);
+                                pl.nPoint.hpg = Math.min(pl.nPoint.hpg + hpMpIncrease, maxHpMp);
+                                pl.nPoint.mpg = Math.min(pl.nPoint.mpg + hpMpIncrease, maxHpMp);
+                                Service.gI().point(pl);
+                                Service.gI().sendThongBao(pl, "Bạn nhận được SD, HP và KI");
+                                InventoryServiceNew.gI().subQuantityItemsBag(pl, item, 1);
+                                InventoryServiceNew.gI().sendItemBags(pl);
                                 break;
                             }
-                            // Kiểm tra nếu đã vượt ngưỡng yêu cầu
-                            boolean alreadyBeyond = pl.nPoint.dameg >= maxDameg
-                                    || pl.nPoint.hpg >= maxHpMp
-                                    || pl.nPoint.mpg >= maxHpMp;
-
-                            if (alreadyBeyond) {
-                                Service.gI().sendThongBao(pl, "Mạnh rồi !!!");
-                                break;
-                            }
-                            pl.nPoint.dameg = Math.min(pl.nPoint.dameg + damegIncrease, maxDameg);
-                            pl.nPoint.hpg = Math.min(pl.nPoint.hpg + hpMpIncrease, maxHpMp);
-                            pl.nPoint.mpg = Math.min(pl.nPoint.mpg + hpMpIncrease, maxHpMp);
-                            Service.gI().point(pl);
-                            Service.gI().sendThongBao(pl, "Bạn nhận được SD, HP và KI");
-                            InventoryServiceNew.gI().subQuantityItemsBag(pl, item, 1);
-                            InventoryServiceNew.gI().sendItemBags(pl);
-                            break;
                         }
                         case 1693: {// truc co trung ky
-                            int requiredDame = 6_000_000;
-                            int requiredHpKi = requiredDame * 3;
-
-                            int damegIncrease = 50_000;
-                            int hpMpIncrease = damegIncrease * 3;
-
-                            int maxDameg;
-                            int maxHpMp;
-                            if (pl.isUseTrucCoDan) {
-                                maxDameg = 13_000_000;
-                                maxHpMp = maxDameg * 3;
+                            int requiredCap = 2;
+                            if (pl.capTuTien != requiredCap) {
+                                Service.gI().sendThongBao(pl, "Cảnh giới chưa đạt yêu cầu để sử dụng Chân Nguyên Đan");
+                                break;
                             } else {
-                                maxDameg = 12_000_000;
-                                maxHpMp = maxDameg * 3;
-                            }
+                                int requiredDame = 6_000_000;
+                                int requiredHpKi = requiredDame * 3;
 
-                            boolean notEligible = pl.nPoint.dameg < requiredDame
-                                    || pl.nPoint.hpg < requiredHpKi
-                                    || pl.nPoint.mpg < requiredHpKi;
+                                int damegIncrease = 50_000;
+                                int hpMpIncrease = damegIncrease * 3;
 
-                            if (notEligible) {
-                                Service.gI().sendThongBao(pl, "Éo dùng được đâu em, lo mà về tu luyện tiếp !!!");
+                                int maxDameg;
+                                int maxHpMp;
+                                if (pl.isUseTrucCoDan) {
+                                    maxDameg = 13_000_000;
+                                    maxHpMp = maxDameg * 3;
+                                } else {
+                                    maxDameg = 12_000_000;
+                                    maxHpMp = maxDameg * 3;
+                                }
+
+                                boolean notEligible = pl.nPoint.dameg < requiredDame
+                                        || pl.nPoint.hpg < requiredHpKi
+                                        || pl.nPoint.mpg < requiredHpKi;
+
+                                if (notEligible) {
+                                    Service.gI().sendThongBao(pl, "Éo dùng được đâu em, lo mà về tu luyện tiếp !!!");
+                                    break;
+                                }
+                                // Kiểm tra nếu đã vượt ngưỡng yêu cầu
+                                boolean alreadyBeyond = pl.nPoint.dameg >= maxDameg
+                                        || pl.nPoint.hpg >= maxHpMp
+                                        || pl.nPoint.mpg >= maxHpMp;
+
+                                if (alreadyBeyond) {
+                                    Service.gI().sendThongBao(pl, "Mạnh rồi !!!");
+                                    break;
+                                }
+                                pl.nPoint.dameg = Math.min(pl.nPoint.dameg + damegIncrease, maxDameg);
+                                pl.nPoint.hpg = Math.min(pl.nPoint.hpg + hpMpIncrease, maxHpMp);
+                                pl.nPoint.mpg = Math.min(pl.nPoint.mpg + hpMpIncrease, maxHpMp);
+                                Service.gI().point(pl);
+                                Service.gI().sendThongBao(pl, "Bạn nhận được SD, HP và KI");
+                                InventoryServiceNew.gI().subQuantityItemsBag(pl, item, 1);
+                                InventoryServiceNew.gI().sendItemBags(pl);
                                 break;
                             }
-                            // Kiểm tra nếu đã vượt ngưỡng yêu cầu
-                            boolean alreadyBeyond = pl.nPoint.dameg >= maxDameg
-                                    || pl.nPoint.hpg >= maxHpMp
-                                    || pl.nPoint.mpg >= maxHpMp;
-
-                            if (alreadyBeyond) {
-                                Service.gI().sendThongBao(pl, "Mạnh rồi !!!");
-                                break;
-                            }
-                            pl.nPoint.dameg = Math.min(pl.nPoint.dameg + damegIncrease, maxDameg);
-                            pl.nPoint.hpg = Math.min(pl.nPoint.hpg + hpMpIncrease, maxHpMp);
-                            pl.nPoint.mpg = Math.min(pl.nPoint.mpg + hpMpIncrease, maxHpMp);
-                            Service.gI().point(pl);
-                            Service.gI().sendThongBao(pl, "Bạn nhận được SD, HP và KI");
-                            InventoryServiceNew.gI().subQuantityItemsBag(pl, item, 1);
-                            InventoryServiceNew.gI().sendItemBags(pl);
-                            break;
                         }
                         case 1694: {// truc co hau ky
-                            int requiredDame = 12_000_000;
-                            int requiredHpKi = requiredDame * 3;
-
-                            int damegIncrease = 50_000;
-                            int hpMpIncrease = damegIncrease * 3;
-
-                            int maxDameg;
-                            int maxHpMp;
-                            if (pl.isUseTrucCoDan) {
-                                maxDameg = 19_000_000;
-                                maxHpMp = maxDameg * 3;
+                            int requiredCap = 2;
+                            if (pl.capTuTien != requiredCap) {
+                                Service.gI().sendThongBao(pl, "Cảnh giới chưa đạt yêu cầu để sử dụng Ngũ Hành Ngưng Đan");
+                                break;
                             } else {
-                                maxDameg = 18_000_000;
-                                maxHpMp = maxDameg * 3;
-                            }
+                                int requiredDame = 12_000_000;
+                                int requiredHpKi = requiredDame * 3;
 
-                            boolean notEligible = pl.nPoint.dameg < requiredDame
-                                    || pl.nPoint.hpg < requiredHpKi
-                                    || pl.nPoint.mpg < requiredHpKi;
+                                int damegIncrease = 50_000;
+                                int hpMpIncrease = damegIncrease * 3;
 
-                            if (notEligible) {
-                                Service.gI().sendThongBao(pl, "Éo dùng được đâu em, lo mà về tu luyện tiếp !!!");
-                                return;
-                            }
-                            // Kiểm tra nếu đã vượt ngưỡng yêu cầu
-                            boolean alreadyBeyond = pl.nPoint.dameg >= maxDameg
-                                    || pl.nPoint.hpg >= maxHpMp
-                                    || pl.nPoint.mpg >= maxHpMp;
+                                int maxDameg;
+                                int maxHpMp;
+                                if (pl.isUseTrucCoDan) {
+                                    maxDameg = 19_000_000;
+                                    maxHpMp = maxDameg * 3;
+                                } else {
+                                    maxDameg = 18_000_000;
+                                    maxHpMp = maxDameg * 3;
+                                }
 
-                            if (alreadyBeyond) {
-                                Service.gI().sendThongBao(pl, "Mạnh rồi !!!");
-                                return;
+                                boolean notEligible = pl.nPoint.dameg < requiredDame
+                                        || pl.nPoint.hpg < requiredHpKi
+                                        || pl.nPoint.mpg < requiredHpKi;
+
+                                if (notEligible) {
+                                    Service.gI().sendThongBao(pl, "Éo dùng được đâu em, lo mà về tu luyện tiếp !!!");
+                                    return;
+                                }
+                                // Kiểm tra nếu đã vượt ngưỡng yêu cầu
+                                boolean alreadyBeyond = pl.nPoint.dameg >= maxDameg
+                                        || pl.nPoint.hpg >= maxHpMp
+                                        || pl.nPoint.mpg >= maxHpMp;
+
+                                if (alreadyBeyond) {
+                                    Service.gI().sendThongBao(pl, "Mạnh rồi !!!");
+                                    return;
+                                }
+                                pl.nPoint.dameg = Math.min(pl.nPoint.dameg + damegIncrease, maxDameg);
+                                pl.nPoint.hpg = Math.min(pl.nPoint.hpg + hpMpIncrease, maxHpMp);
+                                pl.nPoint.mpg = Math.min(pl.nPoint.mpg + hpMpIncrease, maxHpMp);
+                                Service.gI().point(pl);
+                                Service.gI().sendThongBao(pl, "Bạn nhận được SD, HP và KI");
+                                InventoryServiceNew.gI().subQuantityItemsBag(pl, item, 1);
+                                InventoryServiceNew.gI().sendItemBags(pl);
+                                break;
                             }
-                            pl.nPoint.dameg = Math.min(pl.nPoint.dameg + damegIncrease, maxDameg);
-                            pl.nPoint.hpg = Math.min(pl.nPoint.hpg + hpMpIncrease, maxHpMp);
-                            pl.nPoint.mpg = Math.min(pl.nPoint.mpg + hpMpIncrease, maxHpMp);
-                            Service.gI().point(pl);
-                            Service.gI().sendThongBao(pl, "Bạn nhận được SD, HP và KI");
-                            InventoryServiceNew.gI().subQuantityItemsBag(pl, item, 1);
-                            InventoryServiceNew.gI().sendItemBags(pl);
-                            break;
                         }
+                        case 1695: // pháp nguyên đan
+                        {
+                            int requiredCap = 3;
+                            if (pl.capTuTien != requiredCap) {
+                                Service.gI().sendThongBao(pl, "Cảnh giới chưa đạt yêu cầu để sử dụng Ngũ Hành Ngưng Đan");
+                                break;
+                            }
+                            else{
+                                break;
+                            }
+                        }
+                           
                     }
 
             }

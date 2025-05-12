@@ -1952,28 +1952,28 @@ public class NPoint {
         if (this.player.effectFlagBag.usePhongHeo) {
             this.dame += calPercent(this.dame, 15);
         }
-        if (player.capCS > 0) {
-            if (player.capCS <= 10) {
-                dame += (5000) * player.capCS;
-            }
-            if (player.capCS <= 20 && player.capCS > 10) {
-                dame += (7000) * (player.capCS);
-            }
-            if (player.capCS > 20) {
-                dame += (9000) * (player.capCS);
-            }
-        }
-        if (player.capTT > 0) {
-            if (player.capTT <= 10) {
-                dame += (9000) * player.capTT;
-            }
-            if (player.capTT <= 20 && player.capTT > 10) {
-                dame += (11000) * (player.capTT);
-            }
-            if (player.capTT > 20) {
-                dame += (15000) * (player.capTT);
-            }
-        }
+//        if (player.capCS > 0) {
+//            if (player.capCS <= 10) {
+//                dame += (5000) * player.capCS;
+//            }
+//            if (player.capCS <= 20 && player.capCS > 10) {
+//                dame += (7000) * (player.capCS);
+//            }
+//            if (player.capCS > 20) {
+//                dame += (9000) * (player.capCS);
+//            }
+//        }
+//        if (player.capTuTien > 0) {
+//            if (player.capTuTien <= 10) {
+//                dame += (9000) * player.capTuTien;
+//            }
+//            if (player.capTuTien <= 20 && player.capTuTien > 10) {
+//                dame += (11000) * (player.capTuTien);
+//            }
+//            if (player.capTuTien > 20) {
+//                dame += (15000) * (player.capTuTien);
+//            }
+//        }
         if (this.player.lastTimeTitle1 > 0 && player.isTitleUse) {
             this.dame += calPercent(this.dame, 10);
         }
@@ -2394,27 +2394,27 @@ public class NPoint {
                 tiemNang += ((long) tn * this.intrinsic.param1 / 100);
             }
 
-            if (this.power >= 900000000000L) {
-                tiemNang -= ((long) tn * 999 / 1000000);
-            } else if (this.power >= 800000000000L) {
-                tiemNang -= ((long) tn * 990 / 100000);
-            } else if (this.power >= 700000000000L) {
-                tiemNang -= ((long) tn * 889 / 100000);
-            } else if (this.power >= 600000000000L) {
-                tiemNang -= ((long) tn * 880 / 10000);
-            } else if (this.power >= 250000000000L) {
-                tiemNang -= ((long) tn * 779 / 10000);
-            } else if (this.power >= 200000000000L) {
-                tiemNang -= ((long) tn * 770 / 10000);
-            } else if (this.power >= 150000000000L) {
-                tiemNang -= ((long) tn * 669 / 1000);
-            } else if (this.power >= 60000000000L) {
-                tiemNang -= ((long) tn * 660 / 1000);
-            } else if (this.power >= 40000000000L) {
-                tiemNang -= ((long) tn * 559 / 1000);
-            } else if (this.power >= 20000000000L) {
-                tiemNang -= ((long) tn * 550 / 1000);
-            }
+//            if (this.power >= 900000000000L) {
+//                tiemNang -= ((long) tn * 999 / 1000000);
+//            } else if (this.power >= 800000000000L) {
+//                tiemNang -= ((long) tn * 990 / 100000);
+//            } else if (this.power >= 700000000000L) {
+//                tiemNang -= ((long) tn * 889 / 100000);
+//            } else if (this.power >= 600000000000L) {
+//                tiemNang -= ((long) tn * 880 / 10000);
+//            } else if (this.power >= 250000000000L) {
+//                tiemNang -= ((long) tn * 779 / 10000);
+//            } else if (this.power >= 200000000000L) {
+//                tiemNang -= ((long) tn * 770 / 10000);
+//            } else if (this.power >= 150000000000L) {
+//                tiemNang -= ((long) tn * 669 / 1000);
+//            } else if (this.power >= 60000000000L) {
+//                tiemNang -= ((long) tn * 660 / 1000);
+//            } else if (this.power >= 40000000000L) {
+//                tiemNang -= ((long) tn * 559 / 1000);
+//            } else if (this.power >= 20000000000L) {
+//                tiemNang -= ((long) tn * 550 / 1000);
+//            }
             if (this.player != null && this.player.zone != null) {
                 if (MapService.gI().isMapDoanhTrai(player.zone.map.mapId)) {
                     tiemNang = tn * 5;
@@ -2426,7 +2426,7 @@ public class NPoint {
                     tiemNang = tn * 4;
                 }
                 if (MapService.gI().isNguHanhSon(player.zone.map.mapId)) {
-                    tiemNang = tn * 3;
+                    tiemNang = tn * 4;
                 }
             } else {
 
@@ -2452,29 +2452,29 @@ public class NPoint {
     }
 
     public long calSubTNSM(long tiemNang) {
-        if (power >= 701_000_000_000L) {
-            tiemNang -= ((long) tiemNang * 999 / 1000);
-        } else if (power >= 501000000000L) {
-            tiemNang -= ((long) tiemNang * 980 / 1000);
-        } else if (power >= 301000000000L) {
-            tiemNang -= ((long) tiemNang * 98 / 100);
-        } else if (power >= 201000000000L) {
-            tiemNang -= ((long) tiemNang * 97 / 100);
-        } else if (power >= 150000000000L) {
-            tiemNang -= ((long) tiemNang * 95 / 100);
-        } else if (power >= 109000000000L) {
-            tiemNang -= ((long) tiemNang * 91 / 100);
-        } else if (power >= 180000000000L) {
-            tiemNang -= ((long) tiemNang * 90 / 100);
-        } else if (power >= 110000000000L) {
-            tiemNang -= ((long) tiemNang * 85 / 100);
-        } else if (power >= 100000000000L) {
-            tiemNang -= ((long) tiemNang * 80 / 100);
-        } else if (power >= 90000000000L) {
-            tiemNang -= ((long) tiemNang * 75 / 100);
-        } else if (power >= 80000000000L) {
-            tiemNang -= ((long) tiemNang * 70 / 100);
-        }
+//        if (power >= 701_000_000_000L) {
+//            tiemNang -= ((long) tiemNang * 999 / 1000);
+//        } else if (power >= 501000000000L) {
+//            tiemNang -= ((long) tiemNang * 980 / 1000);
+//        } else if (power >= 301000000000L) {
+//            tiemNang -= ((long) tiemNang * 98 / 100);
+//        } else if (power >= 201000000000L) {
+//            tiemNang -= ((long) tiemNang * 97 / 100);
+//        } else if (power >= 150000000000L) {
+//            tiemNang -= ((long) tiemNang * 95 / 100);
+//        } else if (power >= 109000000000L) {
+//            tiemNang -= ((long) tiemNang * 91 / 100);
+//        } else if (power >= 180000000000L) {
+//            tiemNang -= ((long) tiemNang * 90 / 100);
+//        } else if (power >= 110000000000L) {
+//            tiemNang -= ((long) tiemNang * 85 / 100);
+//        } else if (power >= 100000000000L) {
+//            tiemNang -= ((long) tiemNang * 80 / 100);
+//        } else if (power >= 90000000000L) {
+//            tiemNang -= ((long) tiemNang * 75 / 100);
+//        } else if (power >= 80000000000L) {
+//            tiemNang -= ((long) tiemNang * 70 / 100);
+//        }
 
         return tiemNang;
     }

@@ -937,7 +937,7 @@ public class Service {
             DoKiepService.gI().process(player, times);
         }
         if (text.equals("tt")) {
- 
+
             sendThongBaoOK(player, "Thông tin nhân vật: " + player.name
                     + "\n\nSức Mạnh: " + Util.getFormatNumber(player.nPoint.power)
                     + "\nChí Mạng: " + Util.getFormatNumber(player.nPoint.overflowcrit)
@@ -945,12 +945,14 @@ public class Service {
                             player.nPoint.tlDameCrit.stream().mapToInt(Integer::intValue).sum()
                     )
                     + "\n\nHp: " + Util.getFormatNumber(player.nPoint.hp) + "/" + Util.getFormatNumber(player.nPoint.hpMax)
-                    + "\n\nKi: " + Util.getFormatNumber(player.nPoint.mp) + "/" + Util.getFormatNumber(player.nPoint.mpMax)
-                    + "\n\nSức đánh: " + Util.getFormatNumber(player.nPoint.dame)
-                    + "\n\nCấp chuyển sinh: " + Util.getFormatNumber(player.capCS)
-                    + "\n\nCảnh giới: " + DoKiepService.gI().getRealNameCanhGioi(player,player.capTT)
-                    + "\n\nĐột Phá: " + DotPhaService.gI().getRealNameDotPha(player.dotpha)
-                    + "\n\nĐại khai sát giới : Cấp 0 ( sắp update )"
+                    + "\nKi: " + Util.getFormatNumber(player.nPoint.mp) + "/" + Util.getFormatNumber(player.nPoint.mpMax)
+                    + "\nSức đánh: " + Util.getFormatNumber(player.nPoint.dame)
+                    + "\nTỉ lệ né: " + Util.getFormatNumber(player.nPoint.tlNeDon)
+                    + "\nPhản sát thương: " + Util.getFormatNumber(player.nPoint.tlPST)
+                    + "\n\nCảnh giới: " + DoKiepService.gI().getRealNameCanhGioi(player, player.capTuTien)
+                    + "\nBình cảnh: " + Util.getFormatNumber(player.capCS)
+                    + "\nĐột Phá: " + DotPhaService.gI().getRealNameDotPha(player.dotpha)
+                   // + "\n\nĐại khai sát giới : Cấp 0 ( sắp update )"
             );
         }
         if (text.equals("boss")) {
@@ -1259,7 +1261,7 @@ public class Service {
         } else if (sucmanh < 80010000000L) {
             return 80010000000L;
         } else if (sucmanh < 200010000000L) {
-            return 200010000000L;
+            return 200_010_000_000L;
         } else if (sucmanh < 1000010000000L) {
             return 1000010000000L;
         }
@@ -1656,7 +1658,7 @@ public class Service {
             return 27;
         } else if (sucmanh < 910000000000L) {
             return 28;
-        } else if (sucmanh < 1000100000000L) {
+        } else if (sucmanh < 1_000_100_000_000L) {
             return 29;
 
         }

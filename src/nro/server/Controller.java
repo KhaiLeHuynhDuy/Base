@@ -1131,7 +1131,7 @@ public class Controller implements IMessageHandler {
         player.zone.mapInfo(player);
 
         // -70 thông báo bigmessage
-        sendThongBaoServer(player);
+        //sendThongBaoServer(player);
         //check activation set
         player.setClothes.setup();
         if (player.pet != null) {
@@ -1223,72 +1223,13 @@ public class Controller implements IMessageHandler {
 //        }
     }
 
-    private void sendThongBaoServer(Player player) {
-        Service.gI().sendThongBaoFromAdmin(player, "\b|6|Ngọc Rồng EMTI Thông Báo\n"
-                + "\n|2|Sự kiện đua top đang diễn ra tại đảo Kame"
-                + "\n|5|Tại các làng sẽ có Gấu Po , sự kiện vô cùng hấp dẫn"
-                + "\n|4|Chú ý: Update bản mới nhất <12-9-2024> tại NREMTI.COM để cập nhật mới nhất!!!");
-    }
-
-//    private void handleDoKiep(MySession session, Message msg, Player player) {
-//        try {
-//
-//            int playerId = msg.readInt();
-//            int clientCapTT = msg.readInt();
-//            long clientGold = msg.readLong();
-//
-//            if (player == null || player.id != playerId || session.player != player) {
-//                Logger.error("Không xác định được người chơi hoặc phiên không hợp lệ.");
-//                return;
-//            }
-//
-//            // Kiểm tra điều kiện độ kiếp
-//            final long goldRequired = 1_000_000;
-//            if (player.inventory.gold < goldRequired) {
-//                Logger.error("Không đủ vàng.");
-//                return;
-//            }
-//
-//            if (clientCapTT != player.capTT) {
-//                Logger.error("Cảnh giới không đồng bộ giữa client và server.");
-//                return;
-//            }
-//
-//            // Tránh spam độ kiếp
-//            if (player.isProcessing) {
-//                Logger.error("Đang độ kiếp, từ chối yêu cầu.");
-//                return;
-//            }
-//
-//            player.isProcessing = true;
-//
-//            boolean success = new Random().nextInt(100) < 90;
-//            int newCapTT = success ? player.capTT + 1 : player.capTT;
-//            long newGold = player.inventory.gold - goldRequired;
-//
-//            if (success) {
-//                player.capTT = (byte) newCapTT;
-//            }
-//            player.inventory.gold = newGold;
-//
-//            // Ghi vào DB
-//            PlayerDAO.updatePlayer(player);
-//
-//            // Gửi phản hồi
-//            Message response = new Message(71);
-//            response.writeBoolean(success);
-//            response.writeInt((int) newGold);
-//            response.writeInt(newCapTT);
-//            session.sendMessage(response);
-//
-//        } catch (Exception e) {
-//            Logger.error("Lỗi xử lý độ kiếp: " + e.getMessage());
-//        } finally {
-//            if (player != null) {
-//                player.isProcessing = false;
-//            }
-//        }
+//    private void sendThongBaoServer(Player player) {
+//        Service.gI().sendThongBaoFromAdmin(player, "\b|6|Ngọc Rồng EMTI Thông Báo\n"
+//                + "\n|2|Sự kiện đua top đang diễn ra tại đảo Kame"
+//                + "\n|5|Tại các làng sẽ có Gấu Po , sự kiện vô cùng hấp dẫn"
+//                + "\n|4|Chú ý: Update bản mới nhất <12-9-2024> tại NREMTI.COM để cập nhật mới nhất!!!");
 //    }
+
 
     private void clearVTSK(Player player) {
 //        _________Xóa item 1______________

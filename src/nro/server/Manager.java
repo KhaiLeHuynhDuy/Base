@@ -95,7 +95,7 @@ public class Manager {
     public static byte SECOND_WAIT_LOGIN = 5;
     public static int MAX_PER_IP = 10000;
     public static int MAX_PLAYER = 10000;
-    public static byte RATE_EXP_SERVER = 10;
+    public static byte RATE_EXP_SERVER = 1;
     public static boolean LOCAL = false;
 
     public static CaiTrang getCaiTrangByItemId(int itemId) {

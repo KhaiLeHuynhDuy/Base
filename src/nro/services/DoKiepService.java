@@ -10,7 +10,7 @@ public class DoKiepService {
 
     private static DoKiepService instance;
     private final Random rand;
-    private static final int MAX_CAPTT = 5;
+    private static final int MAX_CapTuTien = 5;
 
     // Cấu hình mới
     private static final int ITEM_ID_REQUIRED = 457;
@@ -23,7 +23,7 @@ public class DoKiepService {
     };
 
     private static final int[] DAME_REQUIRE = {
-        1_000_000, // 1tr cho Lv0 -> Lv1
+        25_000, // 1tr cho Lv0 -> Lv1
         3_600_000, // 3.6tr cho Lv1 -> Lv2
         5_000_000, // 5tr cho Lv2 -> Lv3
         7_500_000, // 7.5tr cho Lv3 -> Lv4
@@ -51,18 +51,18 @@ public class DoKiepService {
 
     public void process(Player player, int times) {
         try {
-            if (player.capTT >= MAX_CAPTT) {
+            if (player.capTuTien >= MAX_CapTuTien) {
                 Service.gI().sendThongBao(player, "Bạn đã đạt cảnh giới tối đa");
                 return;
             }
 
-            int initialLevel = player.capTT;
+            int initialLevel = player.capTuTien;
             int totalItemsUsed = 0;
             int successCount = 0;
 
             for (int i = 0; i < times; i++) {
-                int currentLevel = player.capTT;
-                if (currentLevel >= MAX_CAPTT) {
+                int currentLevel = player.capTuTien;
+                if (currentLevel >= MAX_CapTuTien) {
                     break;
                 }
 
@@ -74,7 +74,7 @@ public class DoKiepService {
                 // Kiểm tra vật phẩm
                 Item requiredItem = findItem(player);
                 if (requiredItem == null || requiredItem.quantity < requiredItems) {
-                    Service.gI().sendThongBao(player, "Cần " + requiredItems + " Linh Thạch để độ kiếp");
+                    Service.gI().sendThongBao(player, "Cần " + requiredItems + " Thỏi vàng để độ kiếp");
                     break;
                 }
 
@@ -94,15 +94,11 @@ public class DoKiepService {
                 boolean success = rand.nextInt(100) < SUCCESS_RATE[currentLevel];
 
                 if (success) {
-                    player.capTT = (byte) targetLevel;
+                    player.capTuTien = (byte) targetLevel;
                     successCount++;
                     PlayerDAO.updatePlayer(player);
                     InventoryServiceNew.gI().sendItemBags(player);
 
-                    // Thông báo đặc biệt khi lên Trúc Cơ
-                    if (targetLevel == 2) {
-                        Service.gI().sendThongBao(player, "✨ Chúc mừng đạt cảnh giới Trúc Cơ ✨");
-                    }
                     break;
                 }
             }
@@ -111,11 +107,11 @@ public class DoKiepService {
             String resultMsg = String.format(
                     "Kết quả độ kiếp %d lần:\n"
                     + "- Cảnh giới: %s ➔ %s\n"
-                    + "- Đã dùng: %,d Linh Thạch\n"
+                    + "- Đã dùng: %,d Thỏi vàng\n"
                     + "- Tỷ lệ thành công: %d%%",
                     times,
                     getRealNameCanhGioi(player, initialLevel),
-                    getRealNameCanhGioi(player, player.capTT),
+                    getRealNameCanhGioi(player, player.capTuTien),
                     totalItemsUsed,
                     SUCCESS_RATE[initialLevel]
             );
@@ -152,7 +148,11 @@ public class DoKiepService {
                     return "Trúc Cơ";
                 }
             case 3:
-                return "Kim Đan";
+                if (player.dotpha != 0) {
+                    return "Kim Đan";
+                } else {
+                    return "Cụ Linh";
+                }
             case 4:
                 return "Nguyên Anh";
             case 5:
