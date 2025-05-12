@@ -1472,18 +1472,7 @@ public class NPoint {
                 hpMax += (17000) * (player.capCS);
             }
         }
-        if (player.capTT
-                > 0) {
-            if (player.capTT <= 10) {
-                hpMax += (17000) * player.capTT;
-            }
-            if (player.capTT <= 20 && player.capTT > 10) {
-                hpMax += (25000) * (player.capTT);
-            }
-            if (player.capTT > 20) {
-                hpMax += (32000) * (player.capTT);
-            }
-        }
+
         if (player.dotpha == 2) {
 
         }

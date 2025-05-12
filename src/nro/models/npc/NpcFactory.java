@@ -381,24 +381,25 @@ public class NpcFactory {
                                 break;
                             case 6: // Đột phá
                                 // Điều kiện giới hạn Trúc Cơ Cảnh
-                                boolean datGioiHan = player.nPoint.hpMax >= 25000000
-                                        && player.nPoint.mpMax >= 25000000
-                                        && player.nPoint.dame >= 10000000;
-
-                                if (!datGioiHan) {
-                                    Service.gI().sendThongBaoOK(player, "Bạn chưa đạt giới hạn của Trúc Cơ Cảnh để có thể đột phá!");
-                                } else if (player.dotpha != 0) {
-                                    Service.gI().sendThongBaoOK(player, "Bạn đã đột phá rồi, không thể thực hiện lại!");
-                                } else {
-                                    // Cho phép đột phá
-                                    if (select == 0) {
-                                        player.dotpha = 1; // Pháp Tu
-                                        Service.gI().sendThongBaoOK(player, "Bạn đã đột phá thành Pháp Tu!");
-                                    } else if (select == 1) {
-                                        player.dotpha = 2; // Thể Tu
-                                        Service.gI().sendThongBaoOK(player, "Bạn đã đột phá thành Thể Tu!");
-                                    }
-                                }
+//                                boolean datGioiHan = player.nPoint.hpMax >= 25000000
+//                                        && player.nPoint.mpMax >= 25000000
+//                                        && player.nPoint.dame >= 10000000;
+//
+//                                if (!datGioiHan) {
+//                                    Service.gI().sendThongBaoOK(player, "Bạn chưa đạt giới hạn của Trúc Cơ Cảnh để có thể đột phá!");
+//                                } else if (player.dotpha != 0) {
+//                                    Service.gI().sendThongBaoOK(player, "Bạn đã đột phá rồi, không thể thực hiện lại!");
+//                                } else {
+//                                    // Cho phép đột phá
+//                                    if (select == 0) {
+//                                        player.dotpha = 1; // Pháp Tu
+//                                        Service.gI().sendThongBaoOK(player, "Bạn đã đột phá thành Pháp Tu!");
+//                                    } else if (select == 1) {
+//                                        player.dotpha = 2; // Thể Tu
+//                                        Service.gI().sendThongBaoOK(player, "Bạn đã đột phá thành Thể Tu!");
+//                                    }
+//                                }
+                                DotPhaService.gI().thucHienDotPha(player, select);
                                 break;
 
                             case ConstNpc.MENU_START_COMBINE: // Xử lý kết hợp

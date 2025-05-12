@@ -937,28 +937,7 @@ public class Service {
             DoKiepService.gI().process(player, times);
         }
         if (text.equals("tt")) {
-            String dotPhaText;
-            if (player.dotpha == 0) {
-                dotPhaText = "Không";
-            } else if (player.dotpha == 2) {
-                dotPhaText = "Thể";
-            } else if (player.dotpha == 1) {
-                dotPhaText = "Pháp";
-            } else {
-                dotPhaText = "Không xác định"; // Trường hợp giá trị không hợp lệ
-            }
-            String capTTText;
-            if (player.capTT == 0) {
-                capTTText = "Người Phàm";
-            } else if (player.capTT == 1) {
-                capTTText = "Luyện Khí";
-            } else if (player.capTT == 2 && player.isUseTrucCoDan == true) {
-                capTTText = "Thiên Đạo Trúc Cơ";
-            } else if (player.capTT == 2) {
-                capTTText = "Trúc Cơ";
-            } else {
-                capTTText = "Không xác định"; // Trường hợp giá trị không hợp lệ
-            }
+ 
             sendThongBaoOK(player, "Thông tin nhân vật: " + player.name
                     + "\n\nSức Mạnh: " + Util.getFormatNumber(player.nPoint.power)
                     + "\nChí Mạng: " + Util.getFormatNumber(player.nPoint.overflowcrit)
@@ -969,8 +948,8 @@ public class Service {
                     + "\n\nKi: " + Util.getFormatNumber(player.nPoint.mp) + "/" + Util.getFormatNumber(player.nPoint.mpMax)
                     + "\n\nSức đánh: " + Util.getFormatNumber(player.nPoint.dame)
                     + "\n\nCấp chuyển sinh: " + Util.getFormatNumber(player.capCS)
-                    + "\n\nCảnh giới: " + capTTText
-                    + "\n\nĐột Phá: " + dotPhaText
+                    + "\n\nCảnh giới: " + DoKiepService.gI().getRealNameCanhGioi(player,player.capTT)
+                    + "\n\nĐột Phá: " + DotPhaService.gI().getRealNameDotPha(player.dotpha)
                     + "\n\nĐại khai sát giới : Cấp 0 ( sắp update )"
             );
         }
