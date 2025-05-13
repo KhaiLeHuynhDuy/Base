@@ -413,7 +413,7 @@ public class PlayerDAO {
                     + "items_bag, items_box, items_box_lucky_round, friends, enemies, data_intrinsic, data_item_time,"
                     + "data_task, data_mabu_egg, data_charm, skills, skills_shortcut, pet,"
                     + "data_black_ball, data_giai_dau, data_side_task,minipet, data_card,info_phoban,info_phoban_cdrd,"
-                    + " data_item_time_sieu_cap,data_item_time_su_kien,data_item_time_tnsm,item_mails_box, items_ruong_phu,LastTimeDropTail,Achievement,mocsk20_10,Achievement_BoMong,dot_pha,isUseTrucCoDan,capTuTien"
+                    + " data_item_time_sieu_cap,data_item_time_su_kien,data_item_time_tnsm,item_mails_box, items_ruong_phu,LastTimeDropTail,Achievement,mocsk20_10,Achievement_BoMong,dot_pha,isUseTrucCoDan,capTT"
                     //                    + ",event_point, event_point_boss, event_point_nhs, event_point_quai, hp_point_fusion, mp_point_fusion, dame_point_fusion"
                     + ") "
                     + "values ()", userId, name, hair, gender, 0, -1, inventory, location, point, magicTree,
@@ -1294,7 +1294,7 @@ public class PlayerDAO {
                         + "skills_shortcut = ?, pointPvp = ?, data_card = ?, info_phoban = ?, info_phoban_cdrd = ?,"
                         + "event_point = ?,"
                         + "event_point_boss = ?, event_point_nhs = ?, event_point_quai = ?, diem_quy_lao = ?,diem_moc = ?,"
-                        + "hp_point_fusion = ?, mp_point_fusion = ?, dame_point_fusion = ?, dot_pha=?, isUseTrucCoDan = ?, capTuTien = ?"
+                        + "hp_point_fusion = ?, mp_point_fusion = ?, dame_point_fusion = ?, dot_pha=?, isUseTrucCoDan = ?, capTT = ?"
                         + " WHERE id = ?";
 
                 GirlkunDB.executeUpdate(query,
@@ -1344,7 +1344,7 @@ public class PlayerDAO {
                         player.pointfusion.getDameFusion(),
                         player.dotpha,
                         player.isUseTrucCoDan,
-                        player.capTuTien,  
+                        player.capTT,  
                         player.id);
 //                Logger.log(Logger.RED, "Cư dân: " + player.name + " đã lưu dữ liệu thành công! " + (System.currentTimeMillis() - st) + "\n");
             } catch (Exception e) {

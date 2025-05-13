@@ -64,25 +64,6 @@ public class Boss extends Player implements IBossNew, IBossOutfit {
     private Boss parentBoss;
     private Boss[][] bossAppearTogether;
     public long lastTimeJoinMap = System.currentTimeMillis();
-//    public long lastTimeRest;
-//    public int secondsRest;
-//    public int secondsNotify;
-//    public long lastTimeChatS;
-//    public int timeChatS;
-//    public byte indexChatS;
-//    public long lastTimeChatE;
-//    public int timeChatE;
-//    public byte indexChatE;
-//    public long lastTimeChatM;
-//    public int timeChatM;
-//    public long lastTimeNotify;
-//    public int typeBoss;
-//    public long lastTimeTargetPlayer;
-//    public int timeTargetPlayer;
-//    public long timeToRestart;
-//    public Player playerTarget;
-//    public Boss parentBoss;
-//    public Boss[][] bossAppearTogether;
     public Zone zoneFinal;
     protected Boss bossInstance;
 

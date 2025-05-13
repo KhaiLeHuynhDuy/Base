@@ -450,7 +450,6 @@ public class BossManager {
 //                    return new NguyetThan();
                 case BossType.HuyetMa:
                     return new HuyetMa();
-
                 case BossType.CHILL:
                     return new Chill();
                 case BossType.GOHAN:
@@ -465,7 +464,6 @@ public class BossManager {
                     return new Broly();
                 case BossType.BROLY_SUPER:
                     return new BrolySuper();
-
                 case BossType.AKAYA:
                     return new Ayaka();
                 case BossType.HUTAO:
@@ -495,9 +493,6 @@ public class BossManager {
     }
 
     public void showListBoss(Player player) {
-//        if (!player.isAdmin()) {
-//            return;
-//        }
         Message msg;
         try {
             msg = new Message(-96);

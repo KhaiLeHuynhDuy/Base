@@ -1963,15 +1963,15 @@ public class NPoint {
 //                dame += (9000) * (player.capCS);
 //            }
 //        }
-//        if (player.capTuTien > 0) {
-//            if (player.capTuTien <= 10) {
-//                dame += (9000) * player.capTuTien;
+//        if (player.capTT > 0) {
+//            if (player.capTT <= 10) {
+//                dame += (9000) * player.capTT;
 //            }
-//            if (player.capTuTien <= 20 && player.capTuTien > 10) {
-//                dame += (11000) * (player.capTuTien);
+//            if (player.capTT <= 20 && player.capTT > 10) {
+//                dame += (11000) * (player.capTT);
 //            }
-//            if (player.capTuTien > 20) {
-//                dame += (15000) * (player.capTuTien);
+//            if (player.capTT > 20) {
+//                dame += (15000) * (player.capTT);
 //            }
 //        }
         if (this.player.lastTimeTitle1 > 0 && player.isTitleUse) {
@@ -2029,7 +2029,7 @@ public class NPoint {
 //        }
 //
 //    }
-    private void setCrit() { // Zalo: 0358124452 // Name: EMTI 
+    private void setCrit() {
         this.crit = this.critg + this.critAdd;
         this.overflowcrit = crit;
         // Ngọc Rồng Đen 3 Sao

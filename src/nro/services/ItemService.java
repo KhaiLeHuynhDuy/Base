@@ -114,9 +114,9 @@ public class ItemService {
         return otpTanThu(tempId, 1);
     }
 
-    public Item otpThienMa(short tempId) {
-        return otpThienMa(tempId, 1);
-    }
+//    public Item otpThienMa(short tempId) {
+//        return otpThienMa(tempId, 1);
+//    }
 
     public Item createNewItem(short tempId, int quantity) {
         Item item = new Item();
@@ -253,45 +253,45 @@ public class ItemService {
     }
 //tao chi so cho trang bi thien ma
 
-    public Item otpThienMa(short tempId, int quantity) {
-        Item item = new Item();
-        item.template = getTemplate(tempId);
-        item.quantity = quantity;
-        item.createTime = System.currentTimeMillis();
-        if (item.template.type == 0) {
-            item.itemOptions.add(new ItemOption(47, Util.nextInt(100000, 200000)));
-            item.itemOptions.add(new ItemOption(94, Util.nextInt(50, 150)));
-        }
-        if (item.template.type == 1) {
-            item.itemOptions.add(new ItemOption(6, Util.nextInt(10000000, 20000000)));
-            item.itemOptions.add(new ItemOption(77, Util.nextInt(50, 150)));
-        }
-        if (item.template.type == 2) {
-            item.itemOptions.add(new ItemOption(0, Util.nextInt(1000000, 2000000)));
-            item.itemOptions.add(new ItemOption(50, Util.nextInt(50, 150)));
-        }
-        if (item.template.type == 3) {
-            item.itemOptions.add(new ItemOption(7, Util.nextInt(10000000, 20000000)));
-            item.itemOptions.add(new ItemOption(103, Util.nextInt(50, 150)));
-        }
-        if (item.template.type == 4) {
-            item.itemOptions.add(new ItemOption(14, Util.nextInt(100, 200)));
-            item.itemOptions.add(new ItemOption(5, Util.nextInt(10, 50)));
-        }
-        if (item.template.type == 5) {
-            item.itemOptions.add(new Item.ItemOption(6, 50000000));//hp
-            item.itemOptions.add(new Item.ItemOption(7, 50000000));//ki
-            item.itemOptions.add(new Item.ItemOption(47, 5000000));//giáp
-            item.itemOptions.add(new Item.ItemOption(0, 500000));//sd
-            item.itemOptions.add(new Item.ItemOption(5, 25));
-            item.itemOptions.add(new ItemOption(77, 250));
-            item.itemOptions.add(new ItemOption(50, 250));
-            item.itemOptions.add(new ItemOption(103, 250));
-        }
-        item.content = item.getContent();
-        item.info = item.getInfo();
-        return item;
-    }
+//    public Item otpThienMa(short tempId, int quantity) {
+//        Item item = new Item();
+//        item.template = getTemplate(tempId);
+//        item.quantity = quantity;
+//        item.createTime = System.currentTimeMillis();
+//        if (item.template.type == 0) {
+//            item.itemOptions.add(new ItemOption(47, Util.nextInt(100000, 200000)));
+//            item.itemOptions.add(new ItemOption(94, Util.nextInt(50, 150)));
+//        }
+//        if (item.template.type == 1) {
+//            item.itemOptions.add(new ItemOption(6, Util.nextInt(10000000, 20000000)));
+//            item.itemOptions.add(new ItemOption(77, Util.nextInt(50, 150)));
+//        }
+//        if (item.template.type == 2) {
+//            item.itemOptions.add(new ItemOption(0, Util.nextInt(1000000, 2000000)));
+//            item.itemOptions.add(new ItemOption(50, Util.nextInt(50, 150)));
+//        }
+//        if (item.template.type == 3) {
+//            item.itemOptions.add(new ItemOption(7, Util.nextInt(10000000, 20000000)));
+//            item.itemOptions.add(new ItemOption(103, Util.nextInt(50, 150)));
+//        }
+//        if (item.template.type == 4) {
+//            item.itemOptions.add(new ItemOption(14, Util.nextInt(100, 200)));
+//            item.itemOptions.add(new ItemOption(5, Util.nextInt(10, 50)));
+//        }
+//        if (item.template.type == 5) {
+//            item.itemOptions.add(new Item.ItemOption(6, 50000000));//hp
+//            item.itemOptions.add(new Item.ItemOption(7, 50000000));//ki
+//            item.itemOptions.add(new Item.ItemOption(47, 5000000));//giáp
+//            item.itemOptions.add(new Item.ItemOption(0, 500000));//sd
+//            item.itemOptions.add(new Item.ItemOption(5, 25));
+//            item.itemOptions.add(new ItemOption(77, 250));
+//            item.itemOptions.add(new ItemOption(50, 250));
+//            item.itemOptions.add(new ItemOption(103, 250));
+//        }
+//        item.content = item.getContent();
+//        item.info = item.getInfo();
+//        return item;
+//    }
 
     public Item createItemSetKichHoat(int tempId, int quantity) {
         Item item = new Item();

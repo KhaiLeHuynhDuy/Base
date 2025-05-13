@@ -193,7 +193,7 @@ public class GodGK {
                             player.pointfusion.setDameFusion(rs.getInt("dame_point_fusion"));
                             player.dotpha = rs.getInt("dot_pha"); // Add this line
                             player.isUseTrucCoDan = rs.getBoolean("isUseTrucCoDan");
-                            player.capTuTien = rs.getByte("capTuTien");
+                            player.capTT = rs.getByte("capTT");
 
 
                             player.lastTimeDropTail = Long.parseLong(rs.getString("lastTimeDropTail"));

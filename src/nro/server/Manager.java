@@ -294,7 +294,7 @@ public class Manager {
     public static final String queryTopPVP = "SELECT id, CAST( split_str( data_inventory,',',3) AS UNSIGNED) AS HONGNGOC FROM player ORDER BY CAST( split_str( data_inventory,',',3) AS UNSIGNED) DESC LIMIT 10;";
 //    public static final String queryTopNHS = "SELECT id, CAST( NguHanhSonPoint AS UNSIGNED) AS nhs FROM player ORDER BY CAST( NguHanhSonPoint AS UNSIGNED) DESC LIMIT 20;";
 //    public static final String queryTopSKHE = "SELECT id, CAST( topsk16 AS UNSIGNED) AS topsk16 FROM account ORDER BY CAST( topsk16 AS UNSIGNED) DESC LIMIT 20;";
-    public static final String queryTopSK20_10 = "SELECT id, CAST( sk20_10 AS UNSIGNED) AS sk20_10 FROM account ORDER BY CAST( sk20_10 AS UNSIGNED) DESC LIMIT 20;";
+    //public static final String queryTopSK20_10 = "SELECT id, CAST( sk20_10 AS UNSIGNED) AS sk20_10 FROM account ORDER BY CAST( sk20_10 AS UNSIGNED) DESC LIMIT 20;";
 //    public static final String queryTopSKHE2 = "SELECT player.id, account.topsk16 FROM account, player WHERE account.id = player.account_id  ORDER BY topsk16 DESC LIMIT 10";
     public static final String queryTopTV = "select \n"
             + "  player.id , \n"

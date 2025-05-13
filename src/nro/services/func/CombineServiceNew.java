@@ -2369,7 +2369,7 @@ public class CombineServiceNew {
                 new ItemOption(199, Util.nextInt(40, 80)),
                 new ItemOption(94, Util.nextInt(50, 150)),
                 new ItemOption(190, 0),
-                new ItemOption(191, 350)
+                new ItemOption(191, 150)
         ));
 
         player.combineNew.clearItemCombine();
@@ -2382,7 +2382,7 @@ public class CombineServiceNew {
                 new ItemOption(196, Util.nextInt(100, 200)),
                 new ItemOption(77, Util.nextInt(50, 150)),
                 new ItemOption(190, 0),
-                new ItemOption(191, 350)
+                new ItemOption(191, 150)
         ));
 
         player.combineNew.clearItemCombine();
@@ -2395,7 +2395,7 @@ public class CombineServiceNew {
                 new ItemOption(198, Util.nextInt(20, 40)),
                 new ItemOption(50, Util.nextInt(50, 150)),
                 new ItemOption(190, 0),
-                new ItemOption(191, 350)
+                new ItemOption(191, 150)
         ));
 
         player.combineNew.clearItemCombine();
@@ -2408,7 +2408,7 @@ public class CombineServiceNew {
                 new ItemOption(197, Util.nextInt(100, 200)),
                 new ItemOption(103, Util.nextInt(50, 150)),
                 new ItemOption(190, 0),
-                new ItemOption(191, 350)
+                new ItemOption(191, 150)
         ));
 
         player.combineNew.clearItemCombine();
@@ -2421,7 +2421,7 @@ public class CombineServiceNew {
                 new ItemOption(14, Util.nextInt(100, 200)),
                 new ItemOption(5, Util.nextInt(10, 50)),
                 new ItemOption(190, 0),
-                new ItemOption(191, 350)
+                new ItemOption(191, 150)
         ));
 
         player.combineNew.clearItemCombine();
@@ -2441,7 +2441,7 @@ public class CombineServiceNew {
                 new ItemOption(103, 250),
                 new ItemOption(50, 250),
                 new ItemOption(190, 0),
-                new ItemOption(191, 350)
+                new ItemOption(191, 150)
         ));
         player.combineNew.clearItemCombine();
         reOpenItemCombine(player);

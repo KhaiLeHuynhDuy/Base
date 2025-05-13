@@ -51,17 +51,17 @@ public class DoKiepService {
 
     public void process(Player player, int times) {
         try {
-            if (player.capTuTien >= MAX_CapTuTien) {
+            if (player.capTT >= MAX_CapTuTien) {
                 Service.gI().sendThongBao(player, "Bạn đã đạt cảnh giới tối đa");
                 return;
             }
 
-            int initialLevel = player.capTuTien;
+            int initialLevel = player.capTT;
             int totalItemsUsed = 0;
             int successCount = 0;
 
             for (int i = 0; i < times; i++) {
-                int currentLevel = player.capTuTien;
+                int currentLevel = player.capTT;
                 if (currentLevel >= MAX_CapTuTien) {
                     break;
                 }
@@ -94,7 +94,7 @@ public class DoKiepService {
                 boolean success = rand.nextInt(100) < SUCCESS_RATE[currentLevel];
 
                 if (success) {
-                    player.capTuTien = (byte) targetLevel;
+                    player.capTT = (byte) targetLevel;
                     successCount++;
                     PlayerDAO.updatePlayer(player);
                     InventoryServiceNew.gI().sendItemBags(player);
@@ -111,7 +111,7 @@ public class DoKiepService {
                     + "- Tỷ lệ thành công: %d%%",
                     times,
                     getRealNameCanhGioi(player, initialLevel),
-                    getRealNameCanhGioi(player, player.capTuTien),
+                    getRealNameCanhGioi(player, player.capTT),
                     totalItemsUsed,
                     SUCCESS_RATE[initialLevel]
             );

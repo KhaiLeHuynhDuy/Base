@@ -1584,7 +1584,7 @@ public class UseItem {
                         case 1664: // Hoàng Cuc Đan
                         {
                             int requiredCap = 1;
-                            if (pl.capTuTien != requiredCap) {
+                            if (pl.capTT != requiredCap) {
                                 Service.gI().sendThongBao(pl, "Cảnh giới chưa đạt yêu cầu để sử dụng Hoàng Cúc Đan");
                                 break;
                             } else {
@@ -1624,7 +1624,7 @@ public class UseItem {
                         case 1666: // Trúc Cơ Đan
                         {
                             int requiredCap = 1;
-                            if (pl.capTuTien != requiredCap) {
+                            if (pl.capTT != requiredCap) {
                                 Service.gI().sendThongBao(pl, "Cảnh giới chưa đạt yêu cầu để sử dụng Trúc Cơ Đan");
                                 break;
                             } else {
@@ -1679,11 +1679,11 @@ public class UseItem {
                         case 1665:// truc co so ky
                         {
                             int requiredCap = 2;
-                            if (pl.capTuTien != requiredCap) {
+                            if (pl.capTT != requiredCap) {
                                 Service.gI().sendThongBao(pl, "Cảnh giới chưa đạt yêu cầu để sử dụng Long Tủy Đan");
                                 break;
                             } else {
-                                int requiredDame = 4_600_000;
+                                int requiredDame = 3_600_000;
                                 int requiredHpKi = requiredDame * 3;
 
                                 int damegIncrease = 50_000;
@@ -1727,7 +1727,7 @@ public class UseItem {
                         }
                         case 1693: {// truc co trung ky
                             int requiredCap = 2;
-                            if (pl.capTuTien != requiredCap) {
+                            if (pl.capTT != requiredCap) {
                                 Service.gI().sendThongBao(pl, "Cảnh giới chưa đạt yêu cầu để sử dụng Chân Nguyên Đan");
                                 break;
                             } else {
@@ -1776,7 +1776,7 @@ public class UseItem {
                         }
                         case 1694: {// truc co hau ky
                             int requiredCap = 2;
-                            if (pl.capTuTien != requiredCap) {
+                            if (pl.capTT != requiredCap) {
                                 Service.gI().sendThongBao(pl, "Cảnh giới chưa đạt yêu cầu để sử dụng Ngũ Hành Ngưng Đan");
                                 break;
                             } else {
@@ -1826,7 +1826,7 @@ public class UseItem {
                         case 1695: // pháp nguyên đan
                         {
                             int requiredCap = 3;
-                            if (pl.capTuTien != requiredCap) {
+                            if (pl.capTT != requiredCap) {
                                 Service.gI().sendThongBao(pl, "Cảnh giới chưa đạt yêu cầu để sử dụng Ngũ Hành Ngưng Đan");
                                 break;
                             }

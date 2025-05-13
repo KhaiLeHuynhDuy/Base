@@ -251,62 +251,6 @@ public class Service {
         }
     }
 
-//    public void showListTopSD(Player player, List<TOP> tops) {
-//        Message msg;
-//        try {
-//            // Tạo Map để cache dữ liệu Player, tránh gọi loadById nhiều lần
-//            Map<Integer, Player> playerMap = new HashMap<>();
-//            for (TOP top : tops) {
-//                playerMap.put(top.getId_player(), GodGK.loadById(top.getId_player()));
-//            }
-//
-//            // Sắp xếp danh sách theo sức đánh giảm dần
-//            tops.sort((a, b) -> {
-//                Player p1 = playerMap.get(a.getId_player());
-//                Player p2 = playerMap.get(b.getId_player());
-//                if (p1 == null || p2 == null) {
-//                    return 0;
-//                }
-//                return Long.compare(p2.nPoint.dame, p1.nPoint.dame);
-//            });
-//
-//            msg = new Message(-96);
-//            msg.writer().writeByte(0);
-//            msg.writer().writeUTF("Top");
-//            msg.writer().writeByte(tops.size());
-//
-//            for (int i = 0; i < tops.size(); i++) {
-//                TOP top = tops.get(i);
-//                Player pl = playerMap.get(top.getId_player());
-//                if (pl == null) {
-//                    continue;
-//                }
-//
-//                msg.writer().writeInt(i + 1);
-//                msg.writer().writeInt((int) pl.id);
-//                msg.writer().writeShort(pl.getHead());
-//                if (player.getSession().version > 214) {
-//                    msg.writer().writeShort(-1);
-//                }
-//                msg.writer().writeShort(pl.getBody());
-//                msg.writer().writeShort(pl.getLeg());
-//                msg.writer().writeUTF(pl.name);
-//                msg.writer().writeUTF(top.getInfo1());
-//
-//                // Hiển thị thông tin sức đánh
-//                msg.writer().writeUTF("🔥 Sức Đánh: " + pl.nPoint.dame
-//                        + "\n❤️ HP: " + pl.nPoint.hp
-//                        + "\n🔋 KI: " + pl.nPoint.mp
-//                        + "\n📍 Vị trí: " + (pl.zone.map.mapId == 113 ? " Đang thi đấu tại " : " Đang hoạt động tại ")
-//                        + pl.zone.map.mapName + " - Khu vực " + pl.zone.zoneId + "(" + pl.zone.map.mapId + ")");
-//            }
-//
-//            player.sendMessage(msg);
-//            msg.cleanup();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
     public void showListTopDauNhanh(Player player, List<TOP> tops, byte isPVP, int start) {
         Message msg;
         try {
@@ -363,8 +307,12 @@ public class Service {
                 msg.writer().writeShort(pl.getBody());
                 msg.writer().writeShort(pl.getLeg());
                 msg.writer().writeUTF(pl.name);
-                //msg.writer().writeUTF(top.getInfo1());
-                msg.writer().writeUTF(top.getInfo2());
+//                msg.writer().writeUTF(top.getInfo1());
+//                msg.writer().writeUTF(top.getInfo2());
+
+                msg.writer().writeUTF(top.getInfo1());
+                msg.writer().writeUTF("");
+
             }
             player.sendMessage(msg);
             msg.cleanup();
@@ -949,10 +897,10 @@ public class Service {
                     + "\nSức đánh: " + Util.getFormatNumber(player.nPoint.dame)
                     + "\nTỉ lệ né: " + Util.getFormatNumber(player.nPoint.tlNeDon)
                     + "\nPhản sát thương: " + Util.getFormatNumber(player.nPoint.tlPST)
-                    + "\n\nCảnh giới: " + DoKiepService.gI().getRealNameCanhGioi(player, player.capTuTien)
+                    + "\n\nCảnh giới: " + DoKiepService.gI().getRealNameCanhGioi(player, player.capTT)
                     + "\nBình cảnh: " + Util.getFormatNumber(player.capCS)
                     + "\nĐột Phá: " + DotPhaService.gI().getRealNameDotPha(player.dotpha)
-                   // + "\n\nĐại khai sát giới : Cấp 0 ( sắp update )"
+            // + "\n\nĐại khai sát giới : Cấp 0 ( sắp update )"
             );
         }
         if (text.equals("boss")) {
@@ -961,20 +909,6 @@ public class Service {
         if (text.equals("top")) {
             Service.gI().showListTop(player, Manager.topSD);
         }
-//        if (text.equals("info")) {
-//            DecimalFormat decimalFormat = new DecimalFormat("#,###");
-//            String hp = decimalFormat.format(player.nPoint.hp);
-//            String hpMax = decimalFormat.format(player.nPoint.hpMax);
-//            String ki = decimalFormat.format(player.nPoint.mp);
-//            String kiMax = decimalFormat.format(player.nPoint.mpMax);
-//            String dame = decimalFormat.format(player.nPoint.dame);
-////            String dameg = decimalFormat.format(player.nPoint.d);
-//            String info = "HP: " + hp + " / " + hpMax + "\n";
-//            info += "KI: " + ki + " / " + kiMax + "\n";
-//            info += "Sức đánh: " + dame + "";
-//            Service.gI().sendThongBaoOK(player, info);
-//            return;
-//        }
         if (text.startsWith("cheat")) {
             try {
                 String s = text.substring(5);

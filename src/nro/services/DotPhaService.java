@@ -31,7 +31,7 @@ public class DotPhaService {
                 Service.gI().sendThongBaoOK(player, "Bạn chưa đạt giới hạn chỉ số của Trúc Cơ Cảnh để có thể đột phá!");
                 return;
             }
-            if (player.capTuTien != 3) {
+            if (player.capTT != 3) {
                 Service.gI().sendThongBaoOK(player, "Lại độ thiên kiếp rồi lại tới đột phá!");
                 return;
             }
@@ -46,7 +46,7 @@ public class DotPhaService {
                 player.nPoint.dameg = player.nPoint.dameg + 6_000_000;
                 player.nPoint.hpg = player.nPoint.hpg + 3_000_000;
                 player.nPoint.mpg = player.nPoint.mpg + 3_000_000;
-                player.nPoint.tlNeDon += 105;
+               // player.nPoint.tlNeDon += 105;
                 Service.gI().sendThongBaoOK(player, "Bạn đã đột phá thành Pháp Tu!");
             } else if (select == 1) {
                 player.dotpha = 2; // Thể Tu
@@ -54,7 +54,7 @@ public class DotPhaService {
                 player.nPoint.defg = player.nPoint.defg + 1_000_000;
                 player.nPoint.hpg = player.nPoint.hpg + 18_000_000;
                 player.nPoint.mpg = player.nPoint.mpg + 18_000_000;
-                player.nPoint.tlPST += 10;
+               // player.nPoint.tlPST += 10;
                 Service.gI().sendThongBaoOK(player, "Bạn đã đột phá thành Thể Tu!");
             } else {
                 Service.gI().sendThongBaoOK(player, "Lựa chọn không hợp lệ.");

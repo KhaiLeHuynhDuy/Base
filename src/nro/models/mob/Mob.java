@@ -993,7 +993,7 @@ public class Mob {
         }
         if (mapid == 204) {
             if (Util.isTrue(50, 100)) {
-                list.add(new ItemMap(zone, 1680, 100, x, player.location.y, player.id));
+                list.add(new ItemMap(zone, 1680, 1, x, player.location.y, player.id));
             }
         }
 //        if (!player.isPet) {
