@@ -55,6 +55,10 @@ public class DoKiepService {
                 Service.gI().sendThongBao(player, "Bạn đã đạt cảnh giới tối đa");
                 return;
             }
+            if (player.capTT > 0 && player.capCS != 3) {
+                Service.gI().sendThongBao(player, "Bạn chưa đạt đỉnh phong không thể độ kiếp");
+                return;
+            }
 
             int initialLevel = player.capTT;
             int totalItemsUsed = 0;
@@ -95,6 +99,7 @@ public class DoKiepService {
 
                 if (success) {
                     player.capTT = (byte) targetLevel;
+                    player.capCS = 0;
                     successCount++;
                     PlayerDAO.updatePlayer(player);
                     InventoryServiceNew.gI().sendItemBags(player);

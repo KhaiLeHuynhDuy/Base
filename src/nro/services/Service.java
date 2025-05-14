@@ -884,25 +884,49 @@ public class Service {
             }
             DoKiepService.gI().process(player, times);
         }
-        if (text.equals("tt")) {
-
-            sendThongBaoOK(player, "Thông tin nhân vật: " + player.name
-                    + "\n\nSức Mạnh: " + Util.getFormatNumber(player.nPoint.power)
-                    + "\nChí Mạng: " + Util.getFormatNumber(player.nPoint.overflowcrit)
-                    + "\nSức Đánh Chí Mạng: " + Util.getFormatNumber(
-                            player.nPoint.tlDameCrit.stream().mapToInt(Integer::intValue).sum()
-                    )
-                    + "\n\nHp: " + Util.getFormatNumber(player.nPoint.hp) + "/" + Util.getFormatNumber(player.nPoint.hpMax)
-                    + "\nKi: " + Util.getFormatNumber(player.nPoint.mp) + "/" + Util.getFormatNumber(player.nPoint.mpMax)
-                    + "\nSức đánh: " + Util.getFormatNumber(player.nPoint.dame)
-                    + "\nTỉ lệ né: " + Util.getFormatNumber(player.nPoint.tlNeDon)
-                    + "\nPhản sát thương: " + Util.getFormatNumber(player.nPoint.tlPST)
-                    + "\n\nCảnh giới: " + DoKiepService.gI().getRealNameCanhGioi(player, player.capTT)
-                    + "\nBình cảnh: " + Util.getFormatNumber(player.capCS)
-                    + "\nĐột Phá: " + DotPhaService.gI().getRealNameDotPha(player.dotpha)
-            // + "\n\nĐại khai sát giới : Cấp 0 ( sắp update )"
-            );
+        if (text.startsWith("tanmach")) {
+            String[] parts = text.split(" ");
+            int times = 1; // Mặc định 1 lần nếu không có số
+            if (parts.length > 1) {
+                try {
+                    times = Integer.parseInt(parts[1]);
+                    times = Math.min(times, 1000); // Giới hạn tối đa 1000 lần
+                } catch (NumberFormatException e) {
+                    // Bỏ qua lỗi parse số
+                }
+            }
+            BinhCanhService.gI().process(player, times);
         }
+        if (text.equals("tt")) {
+            StringBuilder info = new StringBuilder();
+            info.append("Thông tin nhân vật: ").append(player.name)
+                    .append("\nCảnh giới: ")
+                    .append(DoKiepService.gI().getRealNameCanhGioi(player, player.capTT));
+
+            // Chỉ hiển thị bình cảnh khi đã vào tu tiên (capTT > 0)
+            if (player.capTT > 0) {
+                info.append(" ").append(BinhCanhService.gI().getRealNameBinhCanh(player.capCS));
+            }
+
+            info.append("\nĐột Phá: ")
+                    .append(DotPhaService.gI().getRealNameDotPha(player.dotpha))
+                    .append("\n\nSức Mạnh: ").append(Util.getFormatNumber(player.nPoint.power))
+                    .append("\nChí Mạng: ").append(Util.getFormatNumber(player.nPoint.overflowcrit))
+                    .append("\nSức Đánh Chí Mạng: ")
+                    .append(Util.getFormatNumber(
+                            player.nPoint.tlDameCrit.stream().mapToInt(Integer::intValue).sum()
+                    ))
+                    .append("\n\nHp: ").append(Util.getFormatNumber(player.nPoint.hp))
+                    .append("/").append(Util.getFormatNumber(player.nPoint.hpMax))
+                    .append("\nKi: ").append(Util.getFormatNumber(player.nPoint.mp))
+                    .append("/").append(Util.getFormatNumber(player.nPoint.mpMax))
+                    .append("\nSức đánh: ").append(Util.getFormatNumber(player.nPoint.dame))
+                    .append("\nTỉ lệ né: ").append(Util.getFormatNumber(player.nPoint.tlNeDon))
+                    .append("\nPhản sát thương: ").append(Util.getFormatNumber(player.nPoint.tlPST));
+
+            sendThongBaoOK(player, info.toString());
+        }
+
         if (text.equals("boss")) {
             BossManager.gI().showListBoss(player);
         }
@@ -1445,7 +1469,6 @@ public class Service {
 //            e.printStackTrace();
 //        }
 //    }
-
     public String get_HanhTinh(int hanhtinh) {
         switch (hanhtinh) {
             case 0:
@@ -1635,7 +1658,7 @@ public class Service {
             PlayerService.gI().sendInfoHpMp(pl);
         } catch (Exception e) {
             e.printStackTrace();
-            Logger.logException(Service.class,e);
+            Logger.logException(Service.class, e);
         }
     }
 

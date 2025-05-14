@@ -1667,7 +1667,8 @@ public class UseItem {
                         case 1665:// truc co so ky
                         {
                             int requiredCap = 2;
-                            if (pl.capTT != requiredCap) {
+                            int requiredBinhCanh = 0;
+                            if (pl.capTT != requiredCap && pl.capCS != requiredBinhCanh) {
                                 Service.gI().sendThongBao(pl, "Cảnh giới chưa đạt yêu cầu để sử dụng Long Tủy Đan");
                                 break;
                             } else {
@@ -1715,7 +1716,8 @@ public class UseItem {
                         }
                         case 1693: {// truc co trung ky
                             int requiredCap = 2;
-                            if (pl.capTT != requiredCap) {
+                            int requiredBinhCanh = 1;
+                            if (pl.capTT != requiredCap&& pl.capCS != requiredBinhCanh) {
                                 Service.gI().sendThongBao(pl, "Cảnh giới chưa đạt yêu cầu để sử dụng Chân Nguyên Đan");
                                 break;
                             } else {
@@ -1764,7 +1766,8 @@ public class UseItem {
                         }
                         case 1694: {// truc co hau ky
                             int requiredCap = 2;
-                            if (pl.capTT != requiredCap) {
+                            int requiredBinhCanh =2;
+                            if (pl.capTT != requiredCap&& pl.capCS != requiredBinhCanh) {
                                 Service.gI().sendThongBao(pl, "Cảnh giới chưa đạt yêu cầu để sử dụng Ngũ Hành Ngưng Đan");
                                 break;
                             } else {
@@ -1827,7 +1830,8 @@ public class UseItem {
                         case 1709: {
                             long amount = 5_000_000_000L;
                             pl.nPoint.powerUp(amount);
-                            PlayerService.gI().sendTNSM(pl, (byte)0, amount);
+                            pl.nPoint.tiemNangUp(amount);
+                            PlayerService.gI().sendTNSM(pl, (byte)2, amount);
                             Service.gI().sendThongBao(pl, "Bạn nhận 5 tỷ tu vi");
                             InventoryServiceNew.gI().subQuantityItemsBag(pl, item, 1);
                             InventoryServiceNew.gI().sendItemBags(pl);

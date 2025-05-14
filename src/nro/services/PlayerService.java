@@ -35,7 +35,7 @@ public class PlayerService {
             try {
                 msg = new Message(-3);
                 msg.writer().writeByte(type);// 0 là cộng sm, 1 cộng tn, 2 là cộng cả 2
-                msg.writeFix((int) param);// số tn cần cộng
+                msg.writeFix((long) param);// số tn cần cộng
                 player.sendMessage(msg);
                 msg.cleanup();
             } catch (Exception e) {
