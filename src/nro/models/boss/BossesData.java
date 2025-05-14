@@ -30,6 +30,7 @@ public class BossesData {
     private static final int REST_30_M = 1800;
     private static final int REST_24_H = 86400000;
     private static final int REST_1_H = 3600;
+    private static final int REST_2_H = 7200;
 
     //************************************************************************** Boss nappa
     public static final BossData GOKU_VOCUC = new BossData(
@@ -1265,8 +1266,8 @@ public class BossesData {
                 
             }, //text chat 2
             new String[]{}, //text chat 3
-            REST_15_M, //second rest
-            REST_15_M
+            REST_2_H, //second rest
+            REST_2_H
     );
 
     public static final BossData HUTAO = new BossData(
@@ -1285,8 +1286,8 @@ public class BossesData {
                
             }, //text chat 2
             new String[]{}, //text chat 3
-            REST_15_M, //second rest
-            REST_15_M
+            REST_2_H, //second rest
+            REST_2_H
     );
 
     public static final BossData AKAYA = new BossData(
@@ -1306,8 +1307,8 @@ public class BossesData {
                
             }, //text chat 2
             new String[]{}, //text chat 3
-            REST_15_M, //second rest
-            REST_15_M
+            REST_2_H, //second rest
+            REST_2_H
     );
 
     //**************************************************************************

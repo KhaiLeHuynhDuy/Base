@@ -128,14 +128,18 @@ public class BossManager {
                 BossType.TIEU_DOI_TRUONG, BossType.KING_KONG, BossType.CUMBER, BossType.XEN_BO_HUNG, BossType.MA_TROI,
                 BossType.SIEU_BO_HUNG, BossType.BLACK, BossType.PIC, BossType.BU_MAP, BossType.KUKU, BossType.MAP_DAU_DINH,
                 BossType.RAMBO, BossType.FIDE, BossType.DR_KORE, BossType.ANDROID_14,// BossType.SUPER_ANDROID_17,
-                            BossType.DORAEMON, BossType.NOBITA, BossType.CHAIEN, BossType.XUKA, BossType.XEKO,
-                BossType.GOKU_VOCUC, BossType.ZAMASZIN, BossType.SUPER_BLACK_GOKU_2,
+                BossType.DORAEMON, BossType.NOBITA, BossType.CHAIEN, BossType.XUKA, BossType.XEKO,
+                BossType.ZAMASZIN, BossType.SUPER_BLACK_GOKU_2,
                 BossType.CHILL,
                 BossType.DOI,
                 BossType.MATROI,
                 BossType.XUONG,
-                BossType.NHAT_THAN, BossType.FIDE2, BossType.HEART, BossType.HUTAO, BossType.XIAO, BossType.AKAYA, BossType.JEM_NI_BA, BossType.TOP_PO,
-                BossType.NGUYET_THAN, BossType.GRANONA, BossType.GOHAN, BossType.COOLER, BossType.BROLY, BossType.BROLY_SUPER, BossType.AN_TROM, BossType.AN_TROM_TV
+                BossType.NHAT_THAN, BossType.NGUYET_THAN, 
+                BossType.FIDE2, BossType.HEART, BossType.JEM_NI_BA, BossType.TOP_PO,
+                BossType.GRANONA, BossType.GOHAN, BossType.COOLER, BossType.BROLY, BossType.BROLY_SUPER, BossType.AN_TROM, BossType.AN_TROM_TV,
+                BossType.GOKU_VOCUC,
+                BossType.HUTAO, BossType.XIAO, BossType.AKAYA,
+                BossType.HuyetMa,
             };
             for (int i = 0; i < bossTypes.length; i++) {
                 switch (bossTypes[i]) {
@@ -147,19 +151,19 @@ public class BossManager {
                             Thread.sleep(1000);
                         }
                         break;
-                    case BossType.DOI:
-                    case BossType.AN_TROM:
-                    case BossType.MATROI:
-                    case BossType.XUONG:
-                    case BossType.NHAT_THAN:
-                    case BossType.NGUYET_THAN:
-                    case BossType.AN_TROM_TV:
-
-                        for (int k = 0; k < 4; k++) {
-                            createBoss(bossTypes[i]);
-                            Thread.sleep(1000);
-                        }
-                        break;
+//                    case BossType.DOI:
+//                    case BossType.AN_TROM:
+//                    case BossType.MATROI:
+//                    case BossType.XUONG:
+//                    case BossType.NHAT_THAN:
+//                    case BossType.NGUYET_THAN:
+//                    case BossType.AN_TROM_TV:
+//
+//                        for (int k = 0; k < 4; k++) {
+//                            createBoss(bossTypes[i]);
+//                            Thread.sleep(1000);
+//                        }
+//                        break;
                     case BossType.BROLY_THUONG:
                         for (int q = 0; q < 2; q++) {
                             createBoss(BossType.BROLY_THUONG);
@@ -362,8 +366,8 @@ public class BossManager {
 //                return new Brolythuong(bossID, brolythuong);
 //            }
             switch (bossID) {
-                case BossType.GRANONA:
-                    return new Granona();
+//                case BossType.GRANONA:
+//                    return new Granona();
 //                case BossType.AN_TROM:
 //                    return new AnTrom();
 //                case BossType.AN_TROM_TV:
@@ -450,10 +454,10 @@ public class BossManager {
 //                    return new NguyetThan();
                 case BossType.HuyetMa:
                     return new HuyetMa();
-                case BossType.CHILL:
-                    return new Chill();
-                case BossType.GOHAN:
-                    return new GoHanZoomBi();
+//                case BossType.CHILL:
+//                    return new Chill();
+//                case BossType.GOHAN:
+//                    return new GoHanZoomBi();
                 case BossType.GOKU_VOCUC:
                     return new Gokuvc();
                 case BossType.ZAMASZIN:
@@ -474,8 +478,8 @@ public class BossManager {
                     return new Heart();
 //                case BossType.TOP_PO:
 //                    return new Toppo();
-                case BossType.JEM_NI_BA:
-                    return new Jemniba();
+//                case BossType.JEM_NI_BA:
+//                    return new Jemniba();
                 default:
                     return null;
             }
