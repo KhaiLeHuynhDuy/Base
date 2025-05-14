@@ -45,16 +45,17 @@ public class Pic extends SmallBoss {
             ChangeMapService.gI().changeMap(this, this.zone, x + Util.getOne(-1, 1) * 50, y);
         }
     }
-   @Override
+
+    @Override
     public void reward(Player pl) {
         pl.event.addEventPointBoss(1);
         Service.gI().sendThongBao(pl, "Bạn nhận được 1 điểm săn boss");
-       // byte randomDo = (byte) new Random().nextInt(Manager.itemDC12.length - 1);
+        // byte randomDo = (byte) new Random().nextInt(Manager.itemDC12.length - 1);
         byte randomNR = (byte) new Random().nextInt(Manager.itemIds_NR_SB.length - 1);
 
         //Item roi
         if (Util.isTrue(99, 100)) {
-         
+
             Service.gI().dropItemMap(this.zone, new ItemMap(zone, Manager.itemIds_NR_SB[randomNR], 1, this.location.x, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
         }
         if (Util.isTrue(1, 100)) {
@@ -69,13 +70,14 @@ public class Pic extends SmallBoss {
             Service.gI().dropItemMap(this.zone, new ItemMap(zone, 861, Util.nextInt(100, 300), this.location.x + 6, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
 
         }
+        Service.gI().dropItemMap(this.zone, new ItemMap(zone, 1710, Util.nextInt(1, 3), this.location.x + 6, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
+
         TaskService.gI().checkDoneTaskKillBoss(pl, this);
         if (Util.isTrue(1, 10)) {
             generalRewards(pl);
         }
 
     }
-
 
     @Override
     public void doneChatE() {
@@ -99,8 +101,8 @@ public class Pic extends SmallBoss {
                 this.chat("Xí hụt");
                 return 0;
             }
-           damage = this.nPoint.subDameInjureWithDeff(damage);
-        if (plAtt != null && !piercing && effectSkill.isShielding) {
+            damage = this.nPoint.subDameInjureWithDeff(damage);
+            if (plAtt != null && !piercing && effectSkill.isShielding) {
                 if (damage > nPoint.hpMax) {
                     EffectSkillService.gI().breakShield(this);
                 }
@@ -116,7 +118,8 @@ public class Pic extends SmallBoss {
 //                    ((SuperAndroid17) this.bigBoss).lastTimecanAttack = System.currentTimeMillis();
 //                }
                 return 0;
-            } if (plAtt != null && !piercing && effectSkill.isShielding) {
+            }
+            if (plAtt != null && !piercing && effectSkill.isShielding) {
                 if (damage > nPoint.hpMax) {
 //                    EffectSkillService.gI().breakShield(this);
                     damage = nPoint.hpMax * 0.1;

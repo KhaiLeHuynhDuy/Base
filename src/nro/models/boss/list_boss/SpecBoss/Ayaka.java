@@ -44,6 +44,8 @@ public class Ayaka extends Boss {
         if (Util.isTrue(1, 10)) {
             Service.gI().dropItemMap(this.zone, new ItemMap(zone, Manager.itemIds_DVT[randomDVT], Util.nextInt(1, 20), this.location.x + 6, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
         }
+        Service.gI().dropItemMap(this.zone, new ItemMap(zone, 1710, Util.nextInt(1, 3), this.location.x + 6, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
+
         TaskService.gI().checkDoneTaskKillBoss(pl, this);
         if (Util.isTrue(1, 10)) {
             generalRewards(pl);
@@ -112,5 +114,4 @@ public class Ayaka extends Boss {
 //        }
 //
 //    }
-
 }

@@ -1528,41 +1528,29 @@ public class UseItem {
                             UseItem.gI().Top2sm(pl);
                             break;
                         case 2173:
-
                             UseItem.gI().Top3sm(pl);
                             break;
                         case 2174:
-
                             UseItem.gI().Top4sm(pl);
                             break;
                         case 2175:
-
                             UseItem.gI().Top5sm(pl);
                             break;
-
                         case 2228:
-
                             UseItem.gI().Tuingocxanh(pl);
                             break;
-
                         case 2229:
-
                             UseItem.gI().Tuingochong(pl);
                             break;
-
                         case 2230:
-
                             UseItem.gI().Itemsieucap(pl);
                             break;
                         case 1989:
                             openboxsukien(pl, item, 4);
                             break;
                         case 2028:
-
-//                          
                             UseItem.gI().openLinhthu(pl, item);
                             break;
-
                         case 1331://hop qua
                             OpenhopThucuoi(pl, item);
                             break;
@@ -1829,12 +1817,23 @@ public class UseItem {
                             if (pl.capTT != requiredCap) {
                                 Service.gI().sendThongBao(pl, "Cảnh giới chưa đạt yêu cầu để sử dụng Ngũ Hành Ngưng Đan");
                                 break;
-                            }
-                            else{
+                            } else {
                                 break;
                             }
                         }
-                           
+                        case 1696: {
+                            break;
+                        }
+                        case 1709: {
+                            long amount = 5_000_000_000L;
+                            pl.nPoint.powerUp(amount);
+                            PlayerService.gI().sendTNSM(pl, (byte)0, amount);
+                            Service.gI().sendThongBao(pl, "Bạn nhận 5 tỷ tu vi");
+                            InventoryServiceNew.gI().subQuantityItemsBag(pl, item, 1);
+                            InventoryServiceNew.gI().sendItemBags(pl);
+                            break;
+                        }
+
                     }
 
             }

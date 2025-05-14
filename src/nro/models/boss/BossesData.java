@@ -46,15 +46,12 @@ public class BossesData {
                 {Skill.LIEN_HOAN, 7, 1000}},
             new String[]{"|-1|Ta bị sao thế này !", // ông sửa text cho con boss nó chat gì nha
                 "|-2|Chú Goku",
-                "|-2|Đó không còn là chú Goku nữa rồi",
-                "|-1|GAAAAAAAAAAAAAA!."
+                
             }, //text chat 1
             new String[]{"|-2|Tỉnh lại đi chú Goku",
                 "|-2|Đừng để bị hắn chi phối!",
                 "|-1|Định chạy trốn hả?",
-                "|-1|Ta sẽ tàn sát khu này trong vòng 5 phút nữa",
-                "|-2|Không được rồi!",
-                "|-2|Phải cố hết sức thôi"
+               
             }, //text chat 2
             new String[]{"|-2|Mau nghỉ ngơi nào chú Goku"}, //text chat 3
             REST_15_M,//second rest // thời gian xuất hiện boss 15p/ lần

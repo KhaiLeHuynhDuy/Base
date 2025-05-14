@@ -94,12 +94,14 @@ public class Zone {
     public int getNumOfBosses() {
         return this.bosses.size();
     }
-   
 
     @Setter
     @Getter
     private Player referee;
     private Player Yajiro;
+    @Setter
+    @Getter
+    private Player TestDame;
 
     private void udPlayer() {
         for (int i = this.notBosses.size() - 1; i >= 0; i--) {
@@ -817,7 +819,7 @@ public class Zone {
             if (plInfo.nPoint == null) {
 //                msg.writeFix(Util.maxIntValue(100));
 //                msg.writeFix(Util.maxIntValue(100));
-                System.err.println(plInfo.name +" null nPoint_infoPlayer");
+                System.err.println(plInfo.name + " null nPoint_infoPlayer");
                 return;
             }
             msg.writeFix(Util.maxIntValue(plInfo.nPoint.hp));
@@ -831,7 +833,7 @@ public class Zone {
             if (plInfo.location == null) {
 //                msg.writeFix(Util.maxIntValue(-1));
 //                msg.writeFix(Util.maxIntValue(-1));
-                System.err.println(plInfo.name +" null location_infoPlayer");
+                System.err.println(plInfo.name + " null location_infoPlayer");
                 return;
             }
             msg.writer().writeShort(plInfo.location.x);
@@ -864,9 +866,9 @@ public class Zone {
                 if (plInfo.location == null) {
 //                msg.writeFix(Util.maxIntValue(-1));
 //                msg.writeFix(Util.maxIntValue(-1));
-                System.err.println(plInfo.name +" null2 location_infoPlayer");
-                return;
-            }
+                    System.err.println(plInfo.name + " null2 location_infoPlayer");
+                    return;
+                }
                 msg.writer().writeShort(plInfo.location.x);
                 msg.writer().writeShort(plInfo.location.y);
                 plReceive.sendMessage(msg);

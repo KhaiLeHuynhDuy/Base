@@ -2936,33 +2936,33 @@ public class NPoint {
                 return;
             }
         }
-        if (type == 3) {
-            int defOld = this.defg;
-            tiemNangUse = 2L * (defOld + 5) * point / 2 * 100000;
-            if ((defOld + point) <= getDefLimit()) {
-                if (doUseTiemNang(tiemNangUse)) {
-                    defg += point;
-                }
-            } else {
-                Service.gI().sendThongBaoOK(player, "Vui lòng mở giới hạn sức mạnh");
-                return;
-            }
-        }
-        if (type == 4) {
-            int critOld = this.critg;
-            tiemNangUse = 50000000L;
-            for (int i = 0; i < critOld; i++) {
-                tiemNangUse *= 5L;
-            }
-            if ((critOld + point) <= getCritLimit()) {
-                if (doUseTiemNang(tiemNangUse)) {
-                    critg += point;
-                }
-            } else {
-                Service.gI().sendThongBaoOK(player, "Vui lòng mở giới hạn sức mạnh");
-                return;
-            }
-        }
+//        if (type == 3) {
+//            int defOld = this.defg;
+//            tiemNangUse = 2L * (defOld + 5) * point / 2 * 100000;
+//            if ((defOld + point) <= getDefLimit()) {
+//                if (doUseTiemNang(tiemNangUse)) {
+//                    defg += point;
+//                }
+//            } else {
+//                Service.gI().sendThongBaoOK(player, "Vui lòng mở giới hạn sức mạnh");
+//                return;
+//            }
+//        }
+//        if (type == 4) {
+//            int critOld = this.critg;
+//            tiemNangUse = 50000000L;
+//            for (int i = 0; i < critOld; i++) {
+//                tiemNangUse *= 5L;
+//            }
+//            if ((critOld + point) <= getCritLimit()) {
+//                if (doUseTiemNang(tiemNangUse)) {
+//                    critg += point;
+//                }
+//            } else {
+//                Service.gI().sendThongBaoOK(player, "Vui lòng mở giới hạn sức mạnh");
+//                return;
+//            }
+//        }
         Service.gI().point(player);
         if (manualForPet) {
             Service.gI().sendChiSoPetGoc(((Pet) player).master);

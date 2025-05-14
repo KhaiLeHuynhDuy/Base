@@ -76,6 +76,7 @@ import nro.models.item.CaiTrang;
 import nro.models.item.Item.ItemOption;
 import nro.models.map.EffectMap;
 import nro.models.map.Zone;
+import nro.models.player.TestDame;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -680,30 +681,32 @@ public class Manager {
             }
 
         }
-//        new Thread(() -> {
-//            try {
-//                while (!Maintenance.isRuning) {
-//                    long st = System.currentTimeMillis();
-//                    for (nro.models.map.Map map : MAPS) {
-//                        for (Zone zone : map.zones) {
-//                            try {
-//                                zone.update();
-//                            } catch (Exception e) {
-//                            }
-//                        }
-//                    }
-//                    long timeDo = System.currentTimeMillis() - st;
-//                    if (1000 - timeDo > 0) {
-//                        Thread.sleep(1000 - timeDo);
-//                    }
-//                }
-//            } catch (Exception e) {
-//            }
-//        }, "Update Maps").start();
-//        Referee r = new Referee();
-//        r.initReferee();
-//        Yajiro r1 = new Yajiro();
-//        r1.initYajiro();
+        new Thread(() -> {
+            try {
+                while (!Maintenance.isRuning) {
+                    long st = System.currentTimeMillis();
+                    for (nro.models.map.Map map : MAPS) {
+                        for (Zone zone : map.zones) {
+                            try {
+                                zone.update();
+                            } catch (Exception e) {
+                            }
+                        }
+                    }
+                    long timeDo = System.currentTimeMillis() - st;
+                    if (1000 - timeDo > 0) {
+                        Thread.sleep(1000 - timeDo);
+                    }
+                }
+            } catch (Exception e) {
+            }
+        }, "Update Maps").start();
+        Referee r = new Referee();
+        r.initReferee();
+        Yajiro r1 = new Yajiro();
+        r1.initYajiro();
+        TestDame td = new TestDame();
+        td.initTestDame();
         Logger.success("Init map thành công!");
     }
     public static byte[][] SMALL_VERSION_DATA;

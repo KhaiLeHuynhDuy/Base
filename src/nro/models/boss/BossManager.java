@@ -529,7 +529,7 @@ public class BossManager {
                 msg.writer().writeUTF(boss.getData()[0].getName());
                 if (boss.zone != null) {
                     msg.writer().writeUTF("Sống");
-                    msg.writer().writeUTF(boss.zone.map.mapName + "(" + boss.zone.map.mapId + ") khu " + boss.zone.zoneId + "");
+                    msg.writer().writeUTF(boss.zone.map.mapName + " (" + boss.zone.map.mapId + ") khu " + boss.zone.zoneId + "");
                 } else {
                     msg.writer().writeUTF("Đã chết");
                     msg.writer().writeUTF("Chưa có thông tin !");

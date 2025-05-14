@@ -112,6 +112,8 @@ public class SuperAndroid17 extends Boss {
         }
         Service.gI().dropItemMap(this.zone, new ItemMap(zone, 76, Util.nextInt(10000, 30000), Util.nextInt(this.location.x - 20, this.location.x + 20), zone.map.yPhysicInTop(this.location.x, this.location.y - 24), plKill.id));
         Service.gI().dropItemMap(this.zone, new ItemMap(zone, 76, Util.nextInt(10000, 30000), Util.nextInt(this.location.x - 20, this.location.x + 20), zone.map.yPhysicInTop(this.location.x, this.location.y - 24), plKill.id));
+        Service.gI().dropItemMap(this.zone, new ItemMap(zone, 1710, Util.nextInt(1, 3), this.location.x + 6, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), plKill.id));
+
         Service.gI().dropItemMap(this.zone, new ItemMap(zone, 76, Util.nextInt(10000, 30000), Util.nextInt(this.location.x - 20, this.location.x + 20), zone.map.yPhysicInTop(this.location.x, this.location.y - 24), plKill.id));
     }
 

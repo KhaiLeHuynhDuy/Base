@@ -61,22 +61,22 @@ public class Referee extends Player {
     private void init() {
         int id = -1000000;
         for (Map m : Manager.MAPS) {
-            if (m.mapId == 52) {
-                for (Zone z : m.zones) {
-                    Referee pl = new Referee();
-                    pl.name = "Trọng Tài";
-                    pl.gender = 0;
-                    pl.id = id++;
-                    pl.nPoint.hpMax = 69;
-                    pl.nPoint.hpg = 69;
-                    pl.nPoint.hp = 69;
-                    pl.nPoint.setFullHpMp();
-                    pl.location.x = 387;
-                    pl.location.y = 336;
-                    joinMap(z, pl);
-                    z.setReferee(pl);
-                }
-            } else if (m.mapId == 129) {
+//            if (m.mapId == 52) {
+//                for (Zone z : m.zones) {
+//                    Referee pl = new Referee();
+//                    pl.name = "Trọng Tài";
+//                    pl.gender = 0;
+//                    pl.id = id++;
+//                    pl.nPoint.hpMax = 69;
+//                    pl.nPoint.hpg = 69;
+//                    pl.nPoint.hp = 69;
+//                    pl.nPoint.setFullHpMp();
+//                    pl.location.x = 387;
+//                    pl.location.y = 336;
+//                    joinMap(z, pl);
+//                    z.setReferee(pl);
+//                }
+             if (m.mapId == 129) {
                 for (Zone z : m.zones) {
                     Referee pl = new Referee();
                     pl.name = "Trọng Tài";

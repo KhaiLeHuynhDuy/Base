@@ -1351,10 +1351,10 @@ public class SkillService {
                 plAtt.Hppl += "\n|3|Hp Boss: " + Util.powerToString(plInjure.nPoint.hp);
             }
 
-            if (plAtt.isPl() && b > 20000000000L) {
-                Service.gI().sendThongBao(plAtt, "##Thông tin đối thủ:\n"
-                        + plAtt.Hppl);
-            }
+//            if (plAtt.isPl() && b > 20_000_000_000L) {
+//                Service.gI().sendThongBao(plAtt, "##Thông tin đối thủ:\n"
+//                        + plAtt.Hppl);
+//            }
             if (plAtt.name.toLowerCase().contains("nhân bản") || plInjure.name.toLowerCase().contains("nhân bản")) {
                 PlayerService.gI().sendTypePk(plAtt);
                 PlayerService.gI().sendTypePk(plInjure);

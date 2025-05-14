@@ -44,6 +44,8 @@ public class ZamasKaio extends Boss {
             Service.gI().dropItemMap(this.zone, new ItemMap(zone, 725, 1, this.location.x + 6, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
 
         }
+        Service.gI().dropItemMap(this.zone, new ItemMap(zone, 1710, Util.nextInt(1, 3), this.location.x + 6, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
+
         TaskService.gI().checkDoneTaskKillBoss(pl, this);
         if (Util.isTrue(1, 10)) {
             generalRewards(pl);
@@ -81,7 +83,7 @@ public class ZamasKaio extends Boss {
                 return 0;
             }
 
-damage = this.nPoint.subDameInjureWithDeff(damage);
+            damage = this.nPoint.subDameInjureWithDeff(damage);
             if (plAtt != null && !piercing && effectSkill.isShielding) {
                 if (damage > nPoint.hpMax) {
                     EffectSkillService.gI().breakShield(this);

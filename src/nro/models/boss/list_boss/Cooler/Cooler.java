@@ -64,6 +64,8 @@ public class Cooler extends Boss {
                 Service.gI().dropItemMap(zone, Util.ratiItem(zone, 861, Util.nextInt(300, 1000), this.location.x + X, this.location.y, pl.id));
 
             }
+            Service.gI().dropItemMap(this.zone, new ItemMap(zone, 1710, Util.nextInt(1, 3), this.location.x + 6, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
+
             if (Util.isTrue(1, 10)) {
                 generalRewards(pl);
             }
@@ -100,7 +102,7 @@ public class Cooler extends Boss {
                 this.chat("Xí hụt");
                 return 0;
             }
-damage = this.nPoint.subDameInjureWithDeff(damage);
+            damage = this.nPoint.subDameInjureWithDeff(damage);
             if (plAtt != null && !piercing && effectSkill.isShielding) {
                 if (damage > nPoint.hpMax) {
                     EffectSkillService.gI().breakShield(this);

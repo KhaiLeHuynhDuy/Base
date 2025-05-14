@@ -3768,7 +3768,7 @@ public class CombineServiceNew {
                 return;
             }
             int[] idBongTai = {454, 921, 2064, 2113};
-            int[] idManhVo = {933, 933, 2227};
+            int[] idManhVo = {933, 933, 933};
             int[] slManhVo = {5999, 9999, 19999};
 
             for (Item item : player.combineNew.itemsCombine) {
@@ -6251,7 +6251,7 @@ public class CombineServiceNew {
                 return "Vào hành trang\nChọn loại bông tai tương ứng\n"
                         + "Bông tai Potara + 5999 mảnh vỡ bông tai\n"
                         + "Bông tai cấp 2 + 9999 mảnh vỡ bông tai\n"
-                        + "Bông tai cấp 3 + 19999 hoa cải Hải Phòng\n"
+                        + "Bông tai cấp 3 + 19999 mảnh vỡ bông tai\n"
                         + "Sau đó chọn 'Nâng cấp'\n"
                         + " Xịt mất 10% mảnh vỡ hoặc hoa cải";
 

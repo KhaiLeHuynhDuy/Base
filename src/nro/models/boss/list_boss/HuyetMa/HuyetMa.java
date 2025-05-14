@@ -62,6 +62,8 @@ public class HuyetMa extends Boss {
                                 zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
             }
         }
+        Service.gI().dropItemMap(this.zone, new ItemMap(zone, 1710, Util.nextInt(1, 3), this.location.x + 6, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
+
     }
 
     @Override

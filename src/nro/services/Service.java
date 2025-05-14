@@ -1224,6 +1224,7 @@ public class Service {
                 msg.writer().writeInt(player.nPoint.def);// def full
                 msg.writer().writeByte(player.nPoint.crit);// crit full
                 msg.writer().writeLong(player.nPoint.tiemNang);
+//                msg.writer().writeLong(player.nPoint.power);
                 msg.writer().writeShort(100);
                 msg.writer().writeInt(player.nPoint.defg);
                 msg.writer().writeByte(player.nPoint.critg);
@@ -1231,9 +1232,7 @@ public class Service {
                 msg.cleanup();
             } catch (Exception e) {
                 e.printStackTrace();
-                Logger
-                        .logException(Service.class,
-                                e);
+                Logger.logException(Service.class, e);
             }
         }
     }
@@ -1435,6 +1434,18 @@ public class Service {
         }
     }
 
+//    public void sendTNSM(Player player, byte type, long value) {
+//        try {
+//            Message msg = new Message(-8); // Gói này thường dùng để gửi cập nhật SM/TN
+//            msg.writer().writeByte(type);  // 0 = chỉ SM, 1 = chỉ TN, 2 = cả SM và TN
+//            msg.writer().writeLong(value); // Lượng thay đổi
+//            player.sendMessage(msg);
+//            msg.cleanup();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
     public String get_HanhTinh(int hanhtinh) {
         switch (hanhtinh) {
             case 0:
@@ -1624,9 +1635,7 @@ public class Service {
             PlayerService.gI().sendInfoHpMp(pl);
         } catch (Exception e) {
             e.printStackTrace();
-            Logger
-                    .logException(Service.class,
-                            e);
+            Logger.logException(Service.class,e);
         }
     }
 
