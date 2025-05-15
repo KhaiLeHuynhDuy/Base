@@ -28,12 +28,11 @@ public class ConstMap {
     public static final int CHANGE_BLACK_BALL = 501;
     public static final int CHANGE_MAP_MA_BU = 502;
     public static final int CHANGE_GIAI_DAU_BALL = 503;
-    public static final int TIME_START_SUPPORT = 21;
-    public static final int TIME_END_SUPPORT = 21;
+    public static final int TIME_START_SUPPORT = 22;
+    public static final int TIME_END_SUPPORT = 22;
     public static final List<Integer> LIST_NV_SUPPORT = Arrays.asList(BossType.KUKU, BossType.MAP_DAU_DINH, BossType.RAMBO, BossType.TDST, BossType.FIDE, BossType.ANDROID_19, BossType.DR_KORE, BossType.ANDROID_13,
             BossType.ANDROID_14, BossType.ANDROID_15, BossType.PIC, BossType.POC, BossType.KING_KONG);
     public static final List<Integer> LIST_NV_FIDE = Arrays.asList();
-
     public static final int RANGE_VE_TINH = 150;
     public static final int TIME_HOI_VE_TINH = 5000;
     public static final int PERCENT_VE_TINH_TRI_LUC = 20;

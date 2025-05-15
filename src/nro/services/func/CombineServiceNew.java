@@ -2366,7 +2366,7 @@ public class CombineServiceNew {
     private void chetaoAoThienMa(Player player) {
         sendEffectSuccessCombine(player);
         createThienMaItem(player, (short) 1674, Arrays.asList(
-                new ItemOption(199, Util.nextInt(40, 80)),
+                new ItemOption(199, Util.nextInt(80, 160)),
                 new ItemOption(94, Util.nextInt(50, 150)),
                 new ItemOption(190, 0),
                 new ItemOption(191, 150)
@@ -2379,7 +2379,7 @@ public class CombineServiceNew {
     private void chetaoQuanThienMa(Player player) {
         sendEffectSuccessCombine(player);
         createThienMaItem(player, (short) 1675, Arrays.asList(
-                new ItemOption(196, Util.nextInt(100, 200)),
+                new ItemOption(196, Util.nextInt(200, 400)),
                 new ItemOption(77, Util.nextInt(50, 150)),
                 new ItemOption(190, 0),
                 new ItemOption(191, 150)
@@ -2405,7 +2405,7 @@ public class CombineServiceNew {
     private void chetaoGiayThienMa(Player player) {
         sendEffectSuccessCombine(player);
         createThienMaItem(player, (short) 1677, Arrays.asList(
-                new ItemOption(197, Util.nextInt(100, 200)),
+                new ItemOption(197, Util.nextInt(200, 400)),
                 new ItemOption(103, Util.nextInt(50, 150)),
                 new ItemOption(190, 0),
                 new ItemOption(191, 150)
@@ -2418,8 +2418,8 @@ public class CombineServiceNew {
     private void chetaoTrangSucThienMa(Player player) {
         sendEffectSuccessCombine(player);
         createThienMaItem(player, (short) 1678, Arrays.asList(
-                new ItemOption(14, Util.nextInt(100, 200)),
-                new ItemOption(5, Util.nextInt(10, 50)),
+                new ItemOption(14, Util.nextInt(25, 50)),
+                new ItemOption(5, Util.nextInt(10, 35)),
                 new ItemOption(190, 0),
                 new ItemOption(191, 150)
         ));
@@ -2450,7 +2450,7 @@ public class CombineServiceNew {
     private void chetaoAoVoCucTuTai(Player player) {
         sendEffectSuccessCombine(player);
         createTuTaiItem(player, (short) 1681, Arrays.asList(
-                new ItemOption(199, Util.nextInt(2000, 4000)), // giáp +#00K
+                new ItemOption(199, Util.nextInt(4000, 8000)), // giáp +#00K
                 new ItemOption(94, Util.nextInt(100, 150)), // % giáp
                 new ItemOption(192, 0),
                 new ItemOption(194, 20), // 6 món né đòn 20
@@ -2463,7 +2463,7 @@ public class CombineServiceNew {
     private void chetaoQuanVoCucTuTai(Player player) {
         sendEffectSuccessCombine(player);
         createTuTaiItem(player, (short) 1682, Arrays.asList(
-                new ItemOption(196, Util.nextInt(5000, 10000)), // hp +#00K
+                new ItemOption(196, Util.nextInt(10000, 20000)), // hp +#00K
                 new ItemOption(77, Util.nextInt(100, 150)),
                 new ItemOption(192, 0),
                 new ItemOption(194, 20),
@@ -2489,7 +2489,7 @@ public class CombineServiceNew {
     private void chetaoGiayVoCucTuTai(Player player) {
         sendEffectSuccessCombine(player);
         createTuTaiItem(player, (short) 1684, Arrays.asList(
-                new ItemOption(197, Util.nextInt(5000, 10000)), // ki +#00K
+                new ItemOption(197, Util.nextInt(10000, 20000)), // ki +#00K
                 new ItemOption(103, Util.nextInt(100, 150)),
                 new ItemOption(192, 0),
                 new ItemOption(194, 20),

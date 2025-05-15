@@ -389,51 +389,51 @@ public class Player {
     }
 
     public void updateSupportTime(Player pl) {
-        if (pl.isPl()) {
-            if (pl.zone != null) {
-                pl.zone.hours = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-            }
-            if (pl.zone != null && pl.zone.hours >= ConstMap.TIME_START_SUPPORT && pl.zone.hours <= ConstMap.TIME_END_SUPPORT) {
-                if (!pl.zone.getBosses().isEmpty()) {
-                    List<Player> listBoss = pl.zone.getBosses();
-                    for (Player plBoss : listBoss) {
-                        if (plBoss != null) {
-                            if (pl.playerTask.taskMain.id != 19 && (plBoss.id == BossType.KUKU || plBoss.id == BossType.MAP_DAU_DINH || plBoss.id == BossType.RAMBO)) {
-                                ChangeMapService.gI().changeMapBySpaceShip(pl, pl.gender + 21, -1, -1);
-                                Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
-                                return;
-                            }
-                            if (pl.playerTask.taskMain.id != 20 && (plBoss.id == BossType.TDST)) {
-                                ChangeMapService.gI().changeMapBySpaceShip(pl, pl.gender + 21, -1, -1);
-                                Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
-                                return;
-                            }
-                            if (pl.playerTask.taskMain.id != 21 && (plBoss.id == BossType.FIDE)) {
-                                ChangeMapService.gI().changeMapBySpaceShip(pl, pl.gender + 21, -1, -1);
-                                Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
-                                return;
-                            }
-                            if (pl.playerTask.taskMain.id != 22 && (plBoss.id == BossType.ANDROID_19 || plBoss.id == BossType.DR_KORE)) {
-                                ChangeMapService.gI().changeMapBySpaceShip(pl, pl.gender + 21, -1, -1);
-                                Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
-                                return;
-                            }
-                            if (pl.playerTask.taskMain.id != 23 && (plBoss.id == BossType.ANDROID_13 || plBoss.id == BossType.ANDROID_14 || plBoss.id == BossType.ANDROID_15)) {
-                                ChangeMapService.gI().changeMapBySpaceShip(pl, pl.gender + 21, -1, -1);
-                                Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
-                                return;
-                            }
-                            if (pl.playerTask.taskMain.id != 24 && (plBoss.id == BossType.PIC || plBoss.id == BossType.POC || plBoss.id == BossType.KING_KONG)) {
-                                ChangeMapService.gI().changeMapBySpaceShip(pl, pl.gender + 21, -1, -1);
-                                Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
-                                return;
-                            }
-                        }
-                    }
-                }
-
-            }
-        }
+//        if (pl.isPl()) {
+//            if (pl.zone != null) {
+//                pl.zone.hours = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+//            }
+//            if (pl.zone != null && pl.zone.hours >= ConstMap.TIME_START_SUPPORT && pl.zone.hours <= ConstMap.TIME_END_SUPPORT) {
+//                if (!pl.zone.getBosses().isEmpty()) {
+//                    List<Player> listBoss = pl.zone.getBosses();
+//                    for (Player plBoss : listBoss) {
+//                        if (plBoss != null) {
+//                            if (pl.playerTask.taskMain.id != 19 && (plBoss.id == BossType.KUKU || plBoss.id == BossType.MAP_DAU_DINH || plBoss.id == BossType.RAMBO)) {
+//                                ChangeMapService.gI().changeMapBySpaceShip(pl, pl.gender + 21, -1, -1);
+//                                Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
+//                                return;
+//                            }
+//                            if (pl.playerTask.taskMain.id != 20 && (plBoss.id == BossType.TDST)) {
+//                                ChangeMapService.gI().changeMapBySpaceShip(pl, pl.gender + 21, -1, -1);
+//                                Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
+//                                return;
+//                            }
+//                            if (pl.playerTask.taskMain.id != 21 && (plBoss.id == BossType.FIDE)) {
+//                                ChangeMapService.gI().changeMapBySpaceShip(pl, pl.gender + 21, -1, -1);
+//                                Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
+//                                return;
+//                            }
+//                            if (pl.playerTask.taskMain.id != 22 && (plBoss.id == BossType.ANDROID_19 || plBoss.id == BossType.DR_KORE)) {
+//                                ChangeMapService.gI().changeMapBySpaceShip(pl, pl.gender + 21, -1, -1);
+//                                Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
+//                                return;
+//                            }
+//                            if (pl.playerTask.taskMain.id != 23 && (plBoss.id == BossType.ANDROID_13 || plBoss.id == BossType.ANDROID_14 || plBoss.id == BossType.ANDROID_15)) {
+//                                ChangeMapService.gI().changeMapBySpaceShip(pl, pl.gender + 21, -1, -1);
+//                                Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
+//                                return;
+//                            }
+//                            if (pl.playerTask.taskMain.id != 24 && (plBoss.id == BossType.PIC || plBoss.id == BossType.POC || plBoss.id == BossType.KING_KONG)) {
+//                                ChangeMapService.gI().changeMapBySpaceShip(pl, pl.gender + 21, -1, -1);
+//                                Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
+//                                return;
+//                            }
+//                        }
+//                    }
+//                }
+//
+//            }
+//        }
     }
 
     public long lastTimeDropTail;

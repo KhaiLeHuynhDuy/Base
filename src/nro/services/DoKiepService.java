@@ -10,7 +10,7 @@ public class DoKiepService {
 
     private static DoKiepService instance;
     private final Random rand;
-    private static final int MAX_CapTuTien = 5;
+    private static final int MAX_CapTuTien = 3;
 
     // Cấu hình mới
     private static final int ITEM_ID_REQUIRED = 457;

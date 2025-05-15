@@ -206,51 +206,51 @@ public class ChangeMapService {
                     Service.gI().sendThongBaoOK(pl, "Khu vực đã đầy");
                     return;
                 }
-                if (zoneJoin != null) {
-                    if (!pl.isBoss) {
-                        zoneJoin.hours = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-                        if (zoneJoin.hours >= ConstMap.TIME_START_SUPPORT && zoneJoin.hours <= ConstMap.TIME_END_SUPPORT) {
-                            if (!zoneJoin.getBosses().isEmpty()) {
-                                List<Player> listBoss = zoneJoin.getBosses();
-                                for (Player plBoss : listBoss) {
-                                    if (plBoss != null) {
-                                        if (pl.playerTask.taskMain.id != 19 && (plBoss.id == BossType.KUKU || plBoss.id == BossType.MAP_DAU_DINH || plBoss.id == BossType.RAMBO)) {
-
-                                            Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
-                                            return;
-                                        }
-                                        if (pl.playerTask.taskMain.id != 20 && (plBoss.id == BossType.TDST)) {
-
-                                            Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
-                                            return;
-                                        }
-                                        if (pl.playerTask.taskMain.id != 21 && (plBoss.id == BossType.FIDE)) {
-
-                                            Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
-                                            return;
-                                        }
-                                        if (pl.playerTask.taskMain.id != 22 && (plBoss.id == BossType.ANDROID_19 || plBoss.id == BossType.DR_KORE)) {
-
-                                            Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
-                                            return;
-                                        }
-                                        if (pl.playerTask.taskMain.id != 23 && (plBoss.id == BossType.ANDROID_13 || plBoss.id == BossType.ANDROID_14 || plBoss.id == BossType.ANDROID_15)) {
-
-                                            Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
-                                            return;
-                                        }
-                                        if (pl.playerTask.taskMain.id != 24 && (plBoss.id == BossType.PIC || plBoss.id == BossType.POC || plBoss.id == BossType.KING_KONG)) {
-
-                                            Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
-                                            return;
-                                        }
-                                    }
-                                }
-                            }
-
-                        }
-                    }
-                }
+//                if (zoneJoin != null) {
+//                    if (!pl.isBoss) {
+//                        zoneJoin.hours = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+//                        if (zoneJoin.hours >= ConstMap.TIME_START_SUPPORT && zoneJoin.hours <= ConstMap.TIME_END_SUPPORT) {
+//                            if (!zoneJoin.getBosses().isEmpty()) {
+//                                List<Player> listBoss = zoneJoin.getBosses();
+//                                for (Player plBoss : listBoss) {
+//                                    if (plBoss != null) {
+//                                        if (pl.playerTask.taskMain.id != 19 && (plBoss.id == BossType.KUKU || plBoss.id == BossType.MAP_DAU_DINH || plBoss.id == BossType.RAMBO)) {
+//
+//                                            Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
+//                                            return;
+//                                        }
+//                                        if (pl.playerTask.taskMain.id != 20 && (plBoss.id == BossType.TDST)) {
+//
+//                                            Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
+//                                            return;
+//                                        }
+//                                        if (pl.playerTask.taskMain.id != 21 && (plBoss.id == BossType.FIDE)) {
+//
+//                                            Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
+//                                            return;
+//                                        }
+//                                        if (pl.playerTask.taskMain.id != 22 && (plBoss.id == BossType.ANDROID_19 || plBoss.id == BossType.DR_KORE)) {
+//
+//                                            Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
+//                                            return;
+//                                        }
+//                                        if (pl.playerTask.taskMain.id != 23 && (plBoss.id == BossType.ANDROID_13 || plBoss.id == BossType.ANDROID_14 || plBoss.id == BossType.ANDROID_15)) {
+//
+//                                            Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
+//                                            return;
+//                                        }
+//                                        if (pl.playerTask.taskMain.id != 24 && (plBoss.id == BossType.PIC || plBoss.id == BossType.POC || plBoss.id == BossType.KING_KONG)) {
+//
+//                                            Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
+//                                            return;
+//                                        }
+//                                    }
+//                                }
+//                            }
+//
+//                        }
+//                    }
+//                }
 
                 if (zoneJoin != null) {
                     changeMap(pl, zoneJoin, -1, -1, pl.location.x, pl.location.y, NON_SPACE_SHIP);
@@ -398,49 +398,49 @@ public class ChangeMapService {
             TranhNgocService.getInstance().sendCreatePhoBan(pl);
         }
         if (zoneJoin != null) {
-            if (!pl.isBoss) {
-                zoneJoin.hours = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-                if (zoneJoin.hours >= ConstMap.TIME_START_SUPPORT && zoneJoin.hours <= ConstMap.TIME_END_SUPPORT) {
-                    if (!zoneJoin.getBosses().isEmpty()) {
-                        List<Player> listBoss = zoneJoin.getBosses();
-                        for (Player plBoss : listBoss) {
-                            if (plBoss != null) {
-                                if (pl.playerTask.taskMain.id != 19 && (plBoss.id == BossType.KUKU || plBoss.id == BossType.MAP_DAU_DINH || plBoss.id == BossType.RAMBO)) {
-
-                                    Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
-                                    return;
-                                }
-                                if (pl.playerTask.taskMain.id != 20 && (plBoss.id == BossType.TDST)) {
-
-                                    Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
-                                    return;
-                                }
-                                if (pl.playerTask.taskMain.id != 21 && (plBoss.id == BossType.FIDE)) {
-
-                                    Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
-                                    return;
-                                }
-                                if (pl.playerTask.taskMain.id != 22 && (plBoss.id == BossType.ANDROID_19 || plBoss.id == BossType.DR_KORE)) {
-
-                                    Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
-                                    return;
-                                }
-                                if (pl.playerTask.taskMain.id != 23 && (plBoss.id == BossType.ANDROID_13 || plBoss.id == BossType.ANDROID_14 || plBoss.id == BossType.ANDROID_15)) {
-
-                                    Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
-                                    return;
-                                }
-                                if (pl.playerTask.taskMain.id != 24 && (plBoss.id == BossType.PIC || plBoss.id == BossType.POC || plBoss.id == BossType.KING_KONG)) {
-
-                                    Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
-                                    return;
-                                }
-                            }
-                        }
-                    }
-
-                }
-            }
+//            if (!pl.isBoss) {
+//                zoneJoin.hours = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+//                if (zoneJoin.hours >= ConstMap.TIME_START_SUPPORT && zoneJoin.hours <= ConstMap.TIME_END_SUPPORT) {
+//                    if (!zoneJoin.getBosses().isEmpty()) {
+//                        List<Player> listBoss = zoneJoin.getBosses();
+//                        for (Player plBoss : listBoss) {
+//                            if (plBoss != null) {
+//                                if (pl.playerTask.taskMain.id != 19 && (plBoss.id == BossType.KUKU || plBoss.id == BossType.MAP_DAU_DINH || plBoss.id == BossType.RAMBO)) {
+//
+//                                    Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
+//                                    return;
+//                                }
+//                                if (pl.playerTask.taskMain.id != 20 && (plBoss.id == BossType.TDST)) {
+//
+//                                    Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
+//                                    return;
+//                                }
+//                                if (pl.playerTask.taskMain.id != 21 && (plBoss.id == BossType.FIDE)) {
+//
+//                                    Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
+//                                    return;
+//                                }
+//                                if (pl.playerTask.taskMain.id != 22 && (plBoss.id == BossType.ANDROID_19 || plBoss.id == BossType.DR_KORE)) {
+//
+//                                    Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
+//                                    return;
+//                                }
+//                                if (pl.playerTask.taskMain.id != 23 && (plBoss.id == BossType.ANDROID_13 || plBoss.id == BossType.ANDROID_14 || plBoss.id == BossType.ANDROID_15)) {
+//
+//                                    Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
+//                                    return;
+//                                }
+//                                if (pl.playerTask.taskMain.id != 24 && (plBoss.id == BossType.PIC || plBoss.id == BossType.POC || plBoss.id == BossType.KING_KONG)) {
+//
+//                                    Service.gI().sendThongBaoOK(pl, " changeZone Trong thời gian hỗ trợ\nKhông thể vào khu vực này");
+//                                    return;
+//                                }
+//                            }
+//                        }
+//                    }
+//
+//                }
+//            }
             if (pl.zone != null) {
                 boolean currMapIsCold = MapService.gI().isMapCold(pl.zone.map);
 
