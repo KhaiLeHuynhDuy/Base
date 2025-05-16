@@ -612,10 +612,10 @@ public class Util {
         }
         return gapthuong;
     }
-
-    public static ItemMap manhTS(Zone zone, int tempId, int quantity, int x, int y, long playerId) {
-        return new ItemMap(zone, tempId, quantity, x, y, playerId);
-    }
+//khaile comment
+//    public static ItemMap manhTS(Zone zone, int tempId, int quantity, int x, int y, long playerId) {
+//        return new ItemMap(zone, tempId, quantity, x, y, playerId);
+//    }
 
     public static ItemMap ratiDTL(Zone zone, int tempId, int quantity, int x, int y, long playerId) {
         ItemMap it = new ItemMap(zone, tempId, quantity, x, zone.map.yPhysicInTop(x, y - 24), playerId);

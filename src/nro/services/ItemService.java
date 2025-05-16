@@ -226,19 +226,19 @@ public class ItemService {
         item.quantity = quantity;
         item.createTime = System.currentTimeMillis();
         if (item.template.type == 0) {
-            item.itemOptions.add(new ItemOption(47, 9999));
+            item.itemOptions.add(new ItemOption(47, 999));
         }
         if (item.template.type == 1) {
-            item.itemOptions.add(new ItemOption(6, 9999));
+            item.itemOptions.add(new ItemOption(6, 999));
         }
         if (item.template.type == 2) {
-            item.itemOptions.add(new ItemOption(0, 9999));
+            item.itemOptions.add(new ItemOption(0, 999));
         }
         if (item.template.type == 3) {
-            item.itemOptions.add(new ItemOption(7, 9999));
+            item.itemOptions.add(new ItemOption(7, 999));
         }
         if (item.template.type == 4) {
-            item.itemOptions.add(new ItemOption(14, 99));
+            item.itemOptions.add(new ItemOption(14, 25));
         }
         if (item.template.type == 5) {
             item.itemOptions.add(new Item.ItemOption(50, 15));

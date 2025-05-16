@@ -20,9 +20,9 @@ public class BinhCanhService {
 
     // Mặc định hệ số power requirement khi capTT != 1,2
     private static final long[] DEFAULT_POWER_REQUIRE = {
-        250_000_000_000L,
-        450_000_000_000L,
-        750_000_000_000L
+        22_250_000_000_000L,
+        22_450_000_000_000L,
+        22_750_000_000_000L
     };
 
     // Yêu cầu power theo capTT: [0]=Luyện Khí (capTT=1), [1]=Trúc Cơ (capTT=2)
@@ -93,6 +93,11 @@ public class BinhCanhService {
                     boolean success = rand.nextInt(100) < SUCCESS_RATE[currLevel];
                     if (success) {
                         player.capCS = (byte) targetLevel;
+                        int newplayerpower = 1_500_000;
+                        long oldplayerpower = player.nPoint.power;
+                        long subplayerpower = newplayerpower - oldplayerpower;
+                        PlayerService.gI().sendTNSM(player, (byte) 2, subplayerpower);
+                        player.nPoint.power = newplayerpower;
                         successCount++;
                         PlayerDAO.updatePlayer(player);
                         InventoryServiceNew.gI().sendItemBags(player);

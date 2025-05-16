@@ -290,7 +290,7 @@ public class NpcFactory {
                     if (this.mapId == 5) {
                         createOtherMenu(player, 1,
                                 "Xin chào, ta có thể giúp cậu chế tạo trang bị mạnh mẽ hoặc luyện đan.",
-                                "Chế Tạo", "Luyện Đan", "Đột phá");
+                                "Chế Tạo", "Luyện Đan", "Đột phá", "Luyện Chế Trúc Cơ Đan Dược");
                     }
                 }
             }
@@ -313,6 +313,10 @@ public class NpcFactory {
                                     createOtherMenu(player, 6,
                                             "Đột phá dành cho tu sĩ đã đạt giới hạn của Trúc Cơ Cảnh",
                                             "Pháp Tu", "Thể Tu");
+                                } else if (select == 3) {
+                                    createOtherMenu(player, 7,
+                                            "Cậu muốn luyện loại đan dược nào?",
+                                            "Trúc Cơ Sơ Kỳ", "Trúc Cơ Trung Kỳ", "Trúc Cơ Hậu Kỳ");
                                 }
                                 break;
 
@@ -376,32 +380,24 @@ public class NpcFactory {
                                     case 1:
                                         CombineServiceNew.gI().openTabCombine(player, CombineServiceNew.CHE_TAO_TRUC_CO_DAN);
                                         break;
-
                                 }
                                 break;
                             case 6: // Đột phá
-                                // Điều kiện giới hạn Trúc Cơ Cảnh
-//                                boolean datGioiHan = player.nPoint.hpMax >= 25000000
-//                                        && player.nPoint.mpMax >= 25000000
-//                                        && player.nPoint.dame >= 10000000;
-//
-//                                if (!datGioiHan) {
-//                                    Service.gI().sendThongBaoOK(player, "Bạn chưa đạt giới hạn của Trúc Cơ Cảnh để có thể đột phá!");
-//                                } else if (player.dotpha != 0) {
-//                                    Service.gI().sendThongBaoOK(player, "Bạn đã đột phá rồi, không thể thực hiện lại!");
-//                                } else {
-//                                    // Cho phép đột phá
-//                                    if (select == 0) {
-//                                        player.dotpha = 1; // Pháp Tu
-//                                        Service.gI().sendThongBaoOK(player, "Bạn đã đột phá thành Pháp Tu!");
-//                                    } else if (select == 1) {
-//                                        player.dotpha = 2; // Thể Tu
-//                                        Service.gI().sendThongBaoOK(player, "Bạn đã đột phá thành Thể Tu!");
-//                                    }
-//                                }
                                 DotPhaService.gI().thucHienDotPha(player, select);
                                 break;
-
+                            case 7: // luyện chế trúc cơ đan dược
+                                switch (select) {
+                                    case 0: // trúc cơ sơ kỳ
+                                        CombineServiceNew.gI().openTabCombine(player, CombineServiceNew.CHE_TAO_TRUC_CO_SO);
+                                        break;
+                                    case 1: // trúc cơ trung kỳ
+                                         CombineServiceNew.gI().openTabCombine(player, CombineServiceNew.CHE_TAO_TRUC_CO_TRUNG);
+                                        break;
+                                    case 2:// trúc cơ hậu kỳ
+                                         CombineServiceNew.gI().openTabCombine(player, CombineServiceNew.CHE_TAO_TRUC_CO_HAU);
+                                        break;
+                                }
+                                break;
                             case ConstNpc.MENU_START_COMBINE: // Xử lý kết hợp
                                 if (player.combineNew.typeCombine != -1) {
                                     CombineServiceNew.gI().startCombine(player);

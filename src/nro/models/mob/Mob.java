@@ -1006,17 +1006,19 @@ public class Mob {
                 list.add(new ItemMap(zone, Util.nextInt(220, 224), 1, x, player.location.y, player.id));
             }
         }
-        if (mapid == 123) { // nhs 1
+        if (mapid == 216) { // nhs 1
             if (!player.isPet && Util.isTrue(5, 100)) {
-                int itemId = Util.nextInt(1698, 1700); // tan dan 1- 3
+                int itemId = Util.nextInt(1698, 1706); // tan dan 1- 3
                 list.add(new ItemMap(zone, itemId, 1, x, player.location.y, player.id));
             }
+            list.add(new ItemMap(zone, 457, 1, x, player.location.y, player.id));
         }
-        if (mapid == 124) { //nhs 2
-            if (!player.isPet && Util.isTrue(5, 100)) {
-                int itemId = Util.nextInt(1701, 1703); // tan dan 4 -6
+        if (mapid == 217) { //nhs 2
+            if (!player.isPet && Util.isTrue(15, 100)) {
+                int itemId = Util.nextInt(1698, 1706); // tan dan 1- 3
                 list.add(new ItemMap(zone, itemId, 1, x, player.location.y, player.id));
             }
+            list.add(new ItemMap(zone, 457, 1, x, player.location.y, player.id));
         }
         if (mapid == 122) { //nhs 3
             if (!player.isPet && Util.isTrue(5, 100)) {

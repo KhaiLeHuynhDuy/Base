@@ -106,7 +106,9 @@ public class CombineServiceNew {
 
     public static final int CHE_TAO_DAN_DUOC_LUYEN_KHI = 444;
     public static final int CHE_TAO_TRUC_CO_DAN = 445;
-
+    public static final int CHE_TAO_TRUC_CO_SO = 446;
+    public static final int CHE_TAO_TRUC_CO_TRUNG = 447;
+    public static final int CHE_TAO_TRUC_CO_HAU = 448;
     public static final int MENU_CHE_TAO_DO_THIEN_MA = 530;
 
     private static final int GOLD_BONG_TAI = 500_000_000;
@@ -508,7 +510,7 @@ public class CombineServiceNew {
             return;
         }
 
-        Set<Short> uniqueTanDanIds = new HashSet<>();
+        Set<Short> uniqueHoangCucDanIds = new HashSet<>();
         boolean hasTrucCoDanPhuong = false;
         int countDanDuoc = 0;
         int requiredDanDuoc = 1;
@@ -518,7 +520,7 @@ public class CombineServiceNew {
             if (item != null && item.isNotNullItem()) {
                 // Kiểm tra Hoàng Cực Đan (id = 1664)
                 if (item.template.id == 1664 && item.quantity >= 100) {
-                    uniqueTanDanIds.add(item.template.id);
+                    uniqueHoangCucDanIds.add(item.template.id);
                     countDanDuoc++;
                     validItems.add(item);
                 }
@@ -530,7 +532,7 @@ public class CombineServiceNew {
             }
         }
 
-        if (uniqueTanDanIds.size() < requiredDanDuoc) {
+        if (uniqueHoangCucDanIds.size() < requiredDanDuoc) {
             this.TU_TAI_TIEN.createOtherMenu(player, ConstNpc.IGNORE_MENU,
                     "Bạn cần đủ Hoàng Cực Đan x100!", "Đóng");
             return;
@@ -620,6 +622,248 @@ public class CombineServiceNew {
         }
     }
 
+    private void conditionTrucCoDan_SoKy(Player player) {
+        if (player.combineNew.itemsCombine.isEmpty()) {
+            this.TU_TAI_TIEN.createOtherMenu(player, ConstNpc.IGNORE_MENU,
+                    "Hãy đặt đầy đủ nguyên liệu để chế tạo!", "Đóng");
+            return;
+        }
+
+        Set<Short> uniqueHoangCucDanIds = new HashSet<>();
+        int countDanDuoc = 0;
+        int requiredDanDuoc = 1;
+        List<Item> validItems = new ArrayList<>();
+
+        for (Item item : player.combineNew.itemsCombine) {
+            if (item != null && item.isNotNullItem()) {
+                // Kiểm tra Hoàng Cực Đan (id = 1664)
+                if (item.template.id == 1664 && item.quantity >= 100) {
+                    uniqueHoangCucDanIds.add(item.template.id);
+                    countDanDuoc++;
+                    validItems.add(item);
+                }
+
+            }
+        }
+
+        if (uniqueHoangCucDanIds.size() < requiredDanDuoc || validItems.size() != player.combineNew.itemsCombine.size()) {
+            this.TU_TAI_TIEN.createOtherMenu(player, ConstNpc.IGNORE_MENU,
+                    "Có vật phẩm không hợp lệ hoặc số lượng không đủ!", "Đóng");
+            return;
+        }
+
+//        if (validItems.size() != player.combineNew.itemsCombine.size()) {
+//            this.TU_TAI_TIEN.createOtherMenu(player, ConstNpc.IGNORE_MENU,
+//                    "Có vật phẩm không hợp lệ hoặc số lượng không đủ!", "Đóng");
+//            return;
+//        }
+        if (InventoryServiceNew.gI().getCountEmptyBag(player) == 0) {
+            Service.gI().sendThongBao(player, "Không đủ ô trống trong túi đồ!");
+            return;
+        }
+
+        String concac = "Bạn có chắc muốn chế tạo Trúc Cơ Đan Dược Sơ Kỳ?\nChi phí: \n"
+                + "|2|- Hoàng Cực Đan x100\n";
+        this.TU_TAI_TIEN.createOtherMenu(player, ConstNpc.MENU_START_COMBINE, concac, "Chế tạo", "Từ chối");
+    }
+
+    private void createTrucCoDan_SoKy(Player player, short itemId) {
+        List<Item> hoangCucDanItems = new ArrayList<>();
+
+        // Đếm số lượng Hoàng Cực Đan và tìm Trúc Cơ Đan Phương
+        int countHoangCucDan = 0;
+        for (Item item : player.combineNew.itemsCombine) {
+            if (item != null && item.isNotNullItem()) {
+                if (item.template.id == 1664 && item.quantity >= 1) { // Hoàng Cực Đan
+                    countHoangCucDan += item.quantity;
+                    hoangCucDanItems.add(item);
+                }
+
+            }
+        }
+
+        // Kiểm tra điều kiện đủ nguyên liệu
+        if (countHoangCucDan < 100) {
+            Service.gI().sendThongBao(player, "Bạn cần ít nhất 100 Hoàng Cực Đan!");
+            return;
+        }
+
+        // Trừ Hoàng Cực Đan (100 viên)
+        int removedCount = 0;
+        for (Item item : hoangCucDanItems) {
+            int toRemove = Math.min(item.quantity, 100 - removedCount);
+            InventoryServiceNew.gI().subQuantityItemsBag(player, item, toRemove);
+            removedCount += toRemove;
+            if (removedCount >= 100) {
+                break;
+            }
+        }
+        // Tạo vật phẩm mới (Trúc Cơ Đan Sơ Kỳ)
+        sendEffectSuccessCombine(player);
+        Item newItem = ItemService.gI().createNewItem(itemId);
+        InventoryServiceNew.gI().addItemBag(player, newItem);
+        InventoryServiceNew.gI().sendItemBags(player);
+        Service.gI().sendThongBao(player, "Chúc mừng! Bạn đã chế tạo Trúc Cơ Đan Sơ Kỳ thành công!");
+    }
+
+    private void conditionTrucCoDan_TrungKy(Player player) {
+        if (player.combineNew.itemsCombine.isEmpty()) {
+            this.TU_TAI_TIEN.createOtherMenu(player, ConstNpc.IGNORE_MENU,
+                    "Hãy đặt đầy đủ nguyên liệu để chế tạo!", "Đóng");
+            return;
+        }
+
+        Set<Short> uniqueLongTuyDanIds = new HashSet<>();
+        int countDanDuoc = 0;
+        int requiredDanDuoc = 1;
+        List<Item> validItems = new ArrayList<>();
+
+        for (Item item : player.combineNew.itemsCombine) {
+            if (item != null && item.isNotNullItem()) {
+                // Kiểm tra Long Tủy Đan (id = 1665)
+                if (item.template.id == 1665 && item.quantity >= 3) {
+                    uniqueLongTuyDanIds.add(item.template.id);
+                    countDanDuoc++;
+                    validItems.add(item);
+                }
+
+            }
+        }
+
+        if (uniqueLongTuyDanIds.size() < requiredDanDuoc || validItems.size() != player.combineNew.itemsCombine.size()) {
+            this.TU_TAI_TIEN.createOtherMenu(player, ConstNpc.IGNORE_MENU,
+                    "Có vật phẩm không hợp lệ hoặc số lượng không đủ!", "Đóng");
+            return;
+        }
+
+        if (InventoryServiceNew.gI().getCountEmptyBag(player) == 0) {
+            Service.gI().sendThongBao(player, "Không đủ ô trống trong túi đồ!");
+            return;
+        }
+
+        String concac = "Bạn có chắc muốn chế tạo Trúc Cơ Đan Dược Trung Kỳ?\nChi phí: \n"
+                + "|2|- Long Tủy Đan x3\n";
+        this.TU_TAI_TIEN.createOtherMenu(player, ConstNpc.MENU_START_COMBINE, concac, "Chế tạo", "Từ chối");
+    }
+
+    private void createTrucCoDan_TrungKy(Player player, short itemId) {
+        List<Item> truccodansokyItems = new ArrayList<>();
+
+        // Đếm số lượng 
+        int countLongTuyDan = 0;
+        for (Item item : player.combineNew.itemsCombine) {
+            if (item != null && item.isNotNullItem()) {
+                if (item.template.id == 1665 && item.quantity >= 1) { // Long Tuy Dan
+                    countLongTuyDan += item.quantity;
+                    truccodansokyItems.add(item);
+                }
+
+            }
+        }
+
+        // Kiểm tra điều kiện đủ nguyên liệu
+        if (countLongTuyDan < 3) {
+            Service.gI().sendThongBao(player, "Bạn cần ít nhất 3 Long Tủy Đan!");
+            return;
+        }
+
+        // Trừ 
+        int removedCount = 0;
+        for (Item item : truccodansokyItems) {
+            int toRemove = Math.min(item.quantity, 3 - removedCount);
+            InventoryServiceNew.gI().subQuantityItemsBag(player, item, toRemove);
+            removedCount += toRemove;
+            if (removedCount >= 3) {
+                break;
+            }
+        }
+        // Tạo vật phẩm mới (Trúc Cơ Đan Trung Kỳ)
+        sendEffectSuccessCombine(player);
+        Item newItem = ItemService.gI().createNewItem(itemId);
+        InventoryServiceNew.gI().addItemBag(player, newItem);
+        InventoryServiceNew.gI().sendItemBags(player);
+        Service.gI().sendThongBao(player, "Chúc mừng! Bạn đã chế tạo Trúc Cơ Đan Trung Kỳ thành công!");
+    }
+
+    private void conditionTrucCoDan_HauKy(Player player) {
+        if (player.combineNew.itemsCombine.isEmpty()) {
+            this.TU_TAI_TIEN.createOtherMenu(player, ConstNpc.IGNORE_MENU,
+                    "Hãy đặt đầy đủ nguyên liệu để chế tạo!", "Đóng");
+            return;
+        }
+
+        Set<Short> uniqueChanNguyenDanIds = new HashSet<>();
+        int countDanDuoc = 0;
+        int requiredDanDuoc = 1;
+        List<Item> validItems = new ArrayList<>();
+
+        for (Item item : player.combineNew.itemsCombine) {
+            if (item != null && item.isNotNullItem()) {
+                // Kiểm tra 
+                if (item.template.id == 1693 && item.quantity >= 3) {
+                    uniqueChanNguyenDanIds.add(item.template.id);
+                    countDanDuoc++;
+                    validItems.add(item);
+                }
+
+            }
+        }
+
+        if (uniqueChanNguyenDanIds.size() < requiredDanDuoc || validItems.size() != player.combineNew.itemsCombine.size()) {
+            this.TU_TAI_TIEN.createOtherMenu(player, ConstNpc.IGNORE_MENU,
+                    "Có vật phẩm không hợp lệ hoặc số lượng không đủ!", "Đóng");
+            return;
+        }
+
+        if (InventoryServiceNew.gI().getCountEmptyBag(player) == 0) {
+            Service.gI().sendThongBao(player, "Không đủ ô trống trong túi đồ!");
+            return;
+        }
+
+        String concac = "Bạn có chắc muốn chế tạo Trúc Cơ Đan Dược Hậu Kỳ?\nChi phí: \n"
+                + "|2|- Chân Nguyên Đan x3\n";
+        this.TU_TAI_TIEN.createOtherMenu(player, ConstNpc.MENU_START_COMBINE, concac, "Chế tạo", "Từ chối");
+    }
+
+    private void createTrucCoDan_HauKy(Player player, short itemId) {
+        List<Item> truccodantrungkyItems = new ArrayList<>();
+
+        // Đếm số lượng 
+        int countChanNguyenDan = 0;
+        for (Item item : player.combineNew.itemsCombine) {
+            if (item != null && item.isNotNullItem()) {
+                if (item.template.id == 1693 && item.quantity >= 1) { // Long Tuy Dan
+                    countChanNguyenDan += item.quantity;
+                    truccodantrungkyItems.add(item);
+                }
+
+            }
+        }
+
+        // Kiểm tra điều kiện đủ nguyên liệu
+        if (countChanNguyenDan < 3) {
+            Service.gI().sendThongBao(player, "Bạn cần ít nhất 3 Chân Nguyên Đan!");
+            return;
+        }
+
+        // Trừ 
+        int removedCount = 0;
+        for (Item item : truccodantrungkyItems) {
+            int toRemove = Math.min(item.quantity, 3 - removedCount);
+            InventoryServiceNew.gI().subQuantityItemsBag(player, item, toRemove);
+            removedCount += toRemove;
+            if (removedCount >= 3) {
+                break;
+            }
+        }
+        // Tạo vật phẩm mới (Trúc Cơ Đan Trung Kỳ)
+        sendEffectSuccessCombine(player);
+        Item newItem = ItemService.gI().createNewItem(itemId);
+        InventoryServiceNew.gI().addItemBag(player, newItem);
+        InventoryServiceNew.gI().sendItemBags(player);
+        Service.gI().sendThongBao(player, "Chúc mừng! Bạn đã chế tạo Trúc Cơ Đan Hậu Kỳ thành công!");
+    }
+
     public void showInfoCombine(Player player, int[] index) {
         player.combineNew.clearItemCombine();
         if (index.length > 0) {
@@ -682,6 +926,15 @@ public class CombineServiceNew {
                 break;
             case CHE_TAO_TRUC_CO_DAN:
                 conditionTrucCoDan(player);
+                break;
+            case CHE_TAO_TRUC_CO_SO:
+                conditionTrucCoDan_SoKy(player);
+                break;
+            case CHE_TAO_TRUC_CO_TRUNG:
+                conditionTrucCoDan_TrungKy(player);
+                break;
+            case CHE_TAO_TRUC_CO_HAU:
+                conditionTrucCoDan_HauKy(player);
                 break;
             case CHE_TAO_TRANG_BI_TS:
                 if (player.combineNew.itemsCombine.size()
@@ -788,56 +1041,56 @@ public class CombineServiceNew {
                     this.baHatMit.createOtherMenu(player, ConstNpc.IGNORE_MENU, "Hành trang cần ít nhất 1 chỗ trống", "Đóng");
                 }
                 break;
-            case GIA_HAN_VAT_PHAM:
-                if (player.combineNew.itemsCombine.size()
-                        == 2) {
-                    Item thegh = null;
-                    Item itemGiahan = null;
-                    for (Item item_ : player.combineNew.itemsCombine) {
-                        if (item_.template.id == 1317) {
-                            thegh = item_;
-                        } else if (item_.isTrangBiHSD()) {
-                            itemGiahan = item_;
-                        }
-                    }
-                    if (thegh == null) {
-                        Service.gI().sendThongBaoOK(player, "Cần 1 trang bị có hạn sử dụng và 1 phiếu Gia hạn");
-                        return;
-                    }
-                    if (itemGiahan == null) {
-                        Service.gI().sendThongBaoOK(player, "Cần 1 trang bị có hạn sử dụng và 1 phiếu Gia hạn");
-                        return;
-                    }
-                    for (ItemOption itopt : itemGiahan.itemOptions) {
-                        if (itopt.optionTemplate.id != 93) {
-                            Service.gI().sendThongBaoOK(player, "Trang bị này không phải trang bị có Hạn Sử Dụng");
-                            return;
-
-                        }
-                    }
-                    String npcSay = "Trang bị được gia hạn \"" + itemGiahan.template.name + "\"";
-                    npcSay += itemGiahan.template.name + "\n|2|";
-                    for (Item.ItemOption io : itemGiahan.itemOptions) {
-                        npcSay += io.getOptionString() + "\n";
-                    }
-                    npcSay += "\n|0|Sau khi gia hạn +7 ngày\n";
-
-                    npcSay += "|0|Tỉ lệ thành công: 100%" + "\n";
-                    if (player.inventory.ruby > 1000) {
-                        npcSay += "|2|Cần 1000 hồng ngọc";
-                        this.baHatMit.createOtherMenu(player, ConstNpc.MENU_START_COMBINE, npcSay,
-                                "Gia hạn", "Từ chối");
-
-                    } else if (player.inventory.ruby < 1000) {
-                        int SoVangThieu2 = (int) (1000 - player.inventory.ruby);
-                        this.baHatMit.createOtherMenu(player, ConstNpc.IGNORE_MENU, "Bạn còn thiếu " + SoVangThieu2 + " Hong Ngoc");
-                    } else {
-                        this.baHatMit.createOtherMenu(player, ConstNpc.IGNORE_MENU, "Cần 1 trang bị có hạn sử dụng và 1 phiếu Gia hạn");
-                    }
-                } else {
-                    this.baHatMit.createOtherMenu(player, ConstNpc.IGNORE_MENU, "Hành trang cần ít nhất 1 chỗ trống");
-                }
-                break;
+//            case GIA_HAN_VAT_PHAM:
+//                if (player.combineNew.itemsCombine.size()
+//                        == 2) {
+//                    Item thegh = null;
+//                    Item itemGiahan = null;
+//                    for (Item item_ : player.combineNew.itemsCombine) {
+//                        if (item_.template.id == 1317) {
+//                            thegh = item_;
+//                        } else if (item_.isTrangBiHSD()) {
+//                            itemGiahan = item_;
+//                        }
+//                    }
+//                    if (thegh == null) {
+//                        Service.gI().sendThongBaoOK(player, "Cần 1 trang bị có hạn sử dụng và 1 phiếu Gia hạn");
+//                        return;
+//                    }
+//                    if (itemGiahan == null) {
+//                        Service.gI().sendThongBaoOK(player, "Cần 1 trang bị có hạn sử dụng và 1 phiếu Gia hạn");
+//                        return;
+//                    }
+//                    for (ItemOption itopt : itemGiahan.itemOptions) {
+//                        if (itopt.optionTemplate.id != 93) {
+//                            Service.gI().sendThongBaoOK(player, "Trang bị này không phải trang bị có Hạn Sử Dụng");
+//                            return;
+//
+//                        }
+//                    }
+//                    String npcSay = "Trang bị được gia hạn \"" + itemGiahan.template.name + "\"";
+//                    npcSay += itemGiahan.template.name + "\n|2|";
+//                    for (Item.ItemOption io : itemGiahan.itemOptions) {
+//                        npcSay += io.getOptionString() + "\n";
+//                    }
+//                    npcSay += "\n|0|Sau khi gia hạn +7 ngày\n";
+//
+//                    npcSay += "|0|Tỉ lệ thành công: 100%" + "\n";
+//                    if (player.inventory.ruby > 1000) {
+//                        npcSay += "|2|Cần 1000 hồng ngọc";
+//                        this.baHatMit.createOtherMenu(player, ConstNpc.MENU_START_COMBINE, npcSay,
+//                                "Gia hạn", "Từ chối");
+//
+//                    } else if (player.inventory.ruby < 1000) {
+//                        int SoVangThieu2 = (int) (1000 - player.inventory.ruby);
+//                        this.baHatMit.createOtherMenu(player, ConstNpc.IGNORE_MENU, "Bạn còn thiếu " + SoVangThieu2 + " Hong Ngoc");
+//                    } else {
+//                        this.baHatMit.createOtherMenu(player, ConstNpc.IGNORE_MENU, "Cần 1 trang bị có hạn sử dụng và 1 phiếu Gia hạn");
+//                    }
+//                } else {
+//                    this.baHatMit.createOtherMenu(player, ConstNpc.IGNORE_MENU, "Hành trang cần ít nhất 1 chỗ trống");
+//                }
+//                break;
 
             case EP_SAO_TRANG_BI:
                 if (player.combineNew.itemsCombine.size()
@@ -2356,6 +2609,15 @@ public class CombineServiceNew {
             case CHE_TAO_TRUC_CO_DAN:
                 chetaoTrucCoDan(player);
                 break;
+            case CHE_TAO_TRUC_CO_SO:
+                chetaoTrucCo_So(player);
+                break;
+            case CHE_TAO_TRUC_CO_TRUNG:
+                chetaoTrucCo_Trung(player);
+                break;
+            case CHE_TAO_TRUC_CO_HAU:
+                chetaoTrucCo_Hau(player);
+                break;
         }
         player.iDMark.setIndexMenu(ConstNpc.IGNORE_MENU);
         player.combineNew.clearParamCombine();
@@ -2379,8 +2641,8 @@ public class CombineServiceNew {
     private void chetaoQuanThienMa(Player player) {
         sendEffectSuccessCombine(player);
         createThienMaItem(player, (short) 1675, Arrays.asList(
-                new ItemOption(196, Util.nextInt(200, 400)),
-                new ItemOption(77, Util.nextInt(50, 150)),
+                new ItemOption(196, Util.nextInt(300, 500)),
+                new ItemOption(77, Util.nextInt(75, 175)),
                 new ItemOption(190, 0),
                 new ItemOption(191, 150)
         ));
@@ -2405,8 +2667,8 @@ public class CombineServiceNew {
     private void chetaoGiayThienMa(Player player) {
         sendEffectSuccessCombine(player);
         createThienMaItem(player, (short) 1677, Arrays.asList(
-                new ItemOption(197, Util.nextInt(200, 400)),
-                new ItemOption(103, Util.nextInt(50, 150)),
+                new ItemOption(197, Util.nextInt(300, 500)),
+                new ItemOption(103, Util.nextInt(75, 175)),
                 new ItemOption(190, 0),
                 new ItemOption(191, 150)
         ));
@@ -2463,8 +2725,8 @@ public class CombineServiceNew {
     private void chetaoQuanVoCucTuTai(Player player) {
         sendEffectSuccessCombine(player);
         createTuTaiItem(player, (short) 1682, Arrays.asList(
-                new ItemOption(196, Util.nextInt(10000, 20000)), // hp +#00K
-                new ItemOption(77, Util.nextInt(100, 150)),
+                new ItemOption(196, Util.nextInt(15000, 25000)), // hp +#00K
+                new ItemOption(77, Util.nextInt(150, 200)),
                 new ItemOption(192, 0),
                 new ItemOption(194, 20),
                 new ItemOption(191, 750)
@@ -2489,8 +2751,8 @@ public class CombineServiceNew {
     private void chetaoGiayVoCucTuTai(Player player) {
         sendEffectSuccessCombine(player);
         createTuTaiItem(player, (short) 1684, Arrays.asList(
-                new ItemOption(197, Util.nextInt(10000, 20000)), // ki +#00K
-                new ItemOption(103, Util.nextInt(100, 150)),
+                new ItemOption(197, Util.nextInt(15000, 25000)), // ki +#00K
+                new ItemOption(103, Util.nextInt(150, 200)),
                 new ItemOption(192, 0),
                 new ItemOption(194, 20),
                 new ItemOption(191, 750)
@@ -2522,6 +2784,24 @@ public class CombineServiceNew {
 
     private void chetaoTrucCoDan(Player player) {
         createTrucCoDan(player, (short) 1666);
+        player.combineNew.updateItemsCombine(player.inventory.itemsBag);
+        reOpenItemCombine(player);
+    }
+
+    private void chetaoTrucCo_So(Player player) {
+        createTrucCoDan_SoKy(player, (short) 1665); // long tuy dan
+        player.combineNew.updateItemsCombine(player.inventory.itemsBag);
+        reOpenItemCombine(player);
+    }
+
+    private void chetaoTrucCo_Trung(Player player) {
+        createTrucCoDan_TrungKy(player, (short) 1693); // long tuy dan
+        player.combineNew.updateItemsCombine(player.inventory.itemsBag);
+        reOpenItemCombine(player);
+    }
+
+    private void chetaoTrucCo_Hau(Player player) {
+        createTrucCoDan_HauKy(player, (short) 1694); // long tuy dan
         player.combineNew.updateItemsCombine(player.inventory.itemsBag);
         reOpenItemCombine(player);
     }
@@ -6377,6 +6657,15 @@ public class CombineServiceNew {
                 return "Vào hành trang\n"
                         + "Chọn Hoàng Cực Đan x100\n"
                         + "x1 Trúc Cơ Đan Phương\n";
+                case CHE_TAO_TRUC_CO_SO:
+                return "Vào hành trang\n"
+                        + "Chọn 100 viên Hoàng Cực Đan\n";
+                case CHE_TAO_TRUC_CO_TRUNG:
+                return "Vào hành trang\n"
+                        + "Chọn 3 viên Long Tủy Đan\n";
+                case CHE_TAO_TRUC_CO_HAU:
+                return "Vào hành trang\n"
+                        + "Chọn 3 viên Chân Nguyên Đan\n";
             default:
                 return "Vui lòng chờ thêm thông tin";
         }

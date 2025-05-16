@@ -30,20 +30,33 @@ public class PlayerService {
     }
 
     public void sendTNSM(Player player, byte type, long param) {
-        if (param > 0) {
-            Message msg;
-            try {
-                msg = new Message(-3);
-                msg.writer().writeByte(type);// 0 là cộng sm, 1 cộng tn, 2 là cộng cả 2
-                msg.writeFix((long) param);// số tn cần cộng
-                player.sendMessage(msg);
-                msg.cleanup();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+
+        Message msg;
+        try {
+            msg = new Message(-3);
+            msg.writer().writeByte(type);// 0 là cộng sm, 1 cộng tn, 2 là cộng cả 2
+            msg.writeFix((long) param);// số tn cần cộng
+            player.sendMessage(msg);
+            msg.cleanup();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 
+    public void updateTNSM(Player player) {
+
+        Message msg;
+        try {
+            msg = new Message(-3);
+            msg.writeFix(player.nPoint.power);// số tn cần cộng
+            player.sendMessage(msg);
+            msg.cleanup();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 //     public void sendMessageAllPlayer(Message msg) {
 //        List<Player> fixPlayers = new ArrayList<>(Client.gI().getPlayers());
 //        for (Player pl : fixPlayers) {
@@ -83,6 +96,7 @@ public class PlayerService {
 //        }
 //        msg.cleanup();
 //    }
+
     public void sendMessageAllPlayer(Message msg) {
         for (Player pl : Client.gI().getPlayers()) {
             if (pl != null) {
@@ -340,38 +354,38 @@ public class PlayerService {
     private static final int COST_GOLD_HOI_SINH_NRSD = 500000;
 
     public void hoiSinh(Player player) {
-       // if (player.isDie()) {
+        // if (player.isDie()) {
 
-            boolean canHs = false;
-            if (MapService.gI().isMapBlackBallWar(player.zone.map.mapId) || MapService.gI().isMapMaBu(player.zone.map.mapId) //                    || MapService.gI().isMapMabuWar(player.zone.map.mapId)
-                    ) {
-                if (player.inventory.gold >= COST_GOLD_HOI_SINH) {
-                    player.inventory.gold -= COST_GOLD_HOI_SINH;
-                    canHs = true;
-                } else {
-                    Service.gI().sendThongBao(player, "Không đủ vàng để thực hiện, còn thiếu " + Util.numberToMoney(COST_GOLD_HOI_SINH
-                            - player.inventory.gold) + " vàng");
-                    return;
-                }
+        boolean canHs = false;
+        if (MapService.gI().isMapBlackBallWar(player.zone.map.mapId) || MapService.gI().isMapMaBu(player.zone.map.mapId) //                    || MapService.gI().isMapMabuWar(player.zone.map.mapId)
+                ) {
+            if (player.inventory.gold >= COST_GOLD_HOI_SINH) {
+                player.inventory.gold -= COST_GOLD_HOI_SINH;
+                canHs = true;
+            } else {
+                Service.gI().sendThongBao(player, "Không đủ vàng để thực hiện, còn thiếu " + Util.numberToMoney(COST_GOLD_HOI_SINH
+                        - player.inventory.gold) + " vàng");
+                return;
             }
-            if (!canHs) {
-                if (player.inventory.gem > COST_GEM_HOI_SINH) {
-                    player.inventory.gem -= COST_GEM_HOI_SINH;
-                    canHs = true;
+        }
+        if (!canHs) {
+            if (player.inventory.gem > COST_GEM_HOI_SINH) {
+                player.inventory.gem -= COST_GEM_HOI_SINH;
+                canHs = true;
 
-                } else {
-                    Service.gI().sendThongBao(player, "Bạn không đủ ngọc xanh để hồi sinh");
-                }
+            } else {
+                Service.gI().sendThongBao(player, "Bạn không đủ ngọc xanh để hồi sinh");
             }
-            if (canHs) {
-                Service.gI().sendMoney(player);
-                Service.gI().hsChar(player, Util.maxIntValue(player.nPoint.hpMax), Util.maxIntValue(player.nPoint.mpMax));
-                if (player.zone.map.mapId == ConstTranhNgocNamek.MAP_ID) {
-                    TranhNgocService.getInstance().sendUpdateLift(player);
-                }
+        }
+        if (canHs) {
+            Service.gI().sendMoney(player);
+            Service.gI().hsChar(player, Util.maxIntValue(player.nPoint.hpMax), Util.maxIntValue(player.nPoint.mpMax));
+            if (player.zone.map.mapId == ConstTranhNgocNamek.MAP_ID) {
+                TranhNgocService.getInstance().sendUpdateLift(player);
             }
+        }
 
-       // }
+        // }
     }
 
 //    public void hoiSinhMaBu(Player player) {

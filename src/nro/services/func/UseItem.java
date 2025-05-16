@@ -1828,7 +1828,7 @@ public class UseItem {
                             break;
                         }
                         case 1709: {
-                            long amount = 5_000_000_000L;
+                            long amount = 500_000_000_000L;
                             pl.nPoint.powerUp(amount);
                             pl.nPoint.tiemNangUp(amount);
                             PlayerService.gI().sendTNSM(pl, (byte)2, amount);
