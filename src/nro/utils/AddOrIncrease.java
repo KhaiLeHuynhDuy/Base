@@ -9,7 +9,7 @@ import nro.models.item.Item;
  */
 public class AddOrIncrease {
    
-    public static boolean addItemToBag(List<Item> itemsBag, int itemId, int quantity) {
+    public static boolean addItemDropToBag(List<Item> itemsBag, int itemId, int quantity) {
         for (Item item : itemsBag) {
             // Kiểm tra theo ID vật phẩm 
             if (item.id == itemId) {

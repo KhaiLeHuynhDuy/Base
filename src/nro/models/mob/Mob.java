@@ -35,6 +35,7 @@ import nro.consts.ConstItem;
 
 import nro.jdbc.daos.PlayerDAO;
 import nro.server.Client;
+import nro.utils.AddOrIncrease;
 
 //public final class Mob {
 public class Mob {
@@ -1007,24 +1008,36 @@ public class Mob {
             }
         }
         if (mapid == 216) { // nhs 1
-            if (!player.isPet && Util.isTrue(5, 100)) {
-                int itemId = Util.nextInt(1698, 1706); // tan dan 1- 3
-                list.add(new ItemMap(zone, itemId, 1, x, player.location.y, player.id));
-            }
-            list.add(new ItemMap(zone, 457, 1, x, player.location.y, player.id));
-        }
-        if (mapid == 217) { //nhs 2
             if (!player.isPet && Util.isTrue(15, 100)) {
                 int itemId = Util.nextInt(1698, 1706); // tan dan 1- 3
-                list.add(new ItemMap(zone, itemId, 1, x, player.location.y, player.id));
+                Service.gI().dropItemMapForMe(player,
+                        new ItemMap(zone, itemId, 1, this.location.x + 6, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), player.id));
             }
-            list.add(new ItemMap(zone, 457, 1, x, player.location.y, player.id));
+
         }
-        if (mapid == 122) { //nhs 3
-            if (!player.isPet && Util.isTrue(5, 100)) {
-                int itemId = Util.nextInt(1704, 1706); // tan dan 7- 9
-                list.add(new ItemMap(zone, itemId, 1, x, player.location.y, player.id));
+        if (mapid == 217) { //nhs 2
+            if (!player.isPet && Util.isTrue(45, 100)) {
+                int itemId = Util.nextInt(1698, 1706); // tan dan 1- 3
+                Service.gI().dropItemMapForMe(player,
+                        new ItemMap(zone, itemId, 1, this.location.x + 6, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), player.id));
             }
+            Service.gI().dropItemMapForMe(player,
+                    new ItemMap(zone, 457, 1, this.location.x + 6, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), player.id));
+        }
+        if (mapid == 218) { //nhs 3
+            Service.gI().dropItemMapForMe(player,
+                    new ItemMap(zone, 457, 10, this.location.x + 6, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), player.id));
+            Service.gI().dropItemMapForMe(player,
+                    new ItemMap(zone, 1697, 1, this.location.x + 6, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), player.id));
+            if (player.dotpha == 1) {
+                Service.gI().dropItemMapForMe(player,
+                        new ItemMap(zone, 1711, 1, this.location.x + 6, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), player.id));
+            }
+            if (player.dotpha == 2) {
+                Service.gI().dropItemMapForMe(player,
+                        new ItemMap(zone, 1712, 1, this.location.x + 6, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), player.id));
+            }
+
         }
         if (mapid == 155) {
             if (!player.isPet && Util.isTrue(30, 100)) {

@@ -721,7 +721,7 @@ public class Util {
         //List<Integer> itembuff = Arrays.asList(462, 569, 74, 191, 192, 211, 212);
         //List<Integer> chu = Arrays.asList(537, 538, 539, 540);
         //List<Integer> trungthu = Arrays.asList(886, 887, 888, 889, 1132, 1133);
-        List<Integer> item = Arrays.asList(457, 77, 76, 17, 18, 19, 20);
+        List<Integer> item = Arrays.asList(457, 17, 18, 19, 20);
         //List<Integer> tinhan = Arrays.asList(1314, 1315, 1316);
         //List<Integer> tinhthach = Arrays.asList(1360, 1361, 1362, 1363, 1364, 1365, 1366);
         int hm = 441;

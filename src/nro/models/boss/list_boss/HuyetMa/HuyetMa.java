@@ -50,17 +50,15 @@ public class HuyetMa extends Boss {
         pl.event.addEventPointBoss(1);
         Service.gI().sendThongBao(pl, "Bạn nhận được 1 điểm săn boss");
 
-        if (Util.isTrue(99, 100)) {
-            int itemId = 1680;
-            int quantity = 1000;
+        int itemId = 1680;
+        int quantity = 1000;
 
-            // Gọi hàm đồng bộ
-            if (!AddOrIncrease.addItemToBag(pl.inventory.itemsBag, itemId, quantity)) {
-                // Nếu không cộng dồn được -> rơi xuống đất
-                Service.gI().dropItemMap(this.zone,
-                        new ItemMap(zone, itemId, quantity, this.location.x + 6,
-                                zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
-            }
+        // Gọi hàm đồng bộ
+        if (!AddOrIncrease.addItemDropToBag(pl.inventory.itemsBag, itemId, quantity)) {
+            // Nếu không cộng dồn được -> rơi xuống đất
+            Service.gI().dropItemMap(this.zone,
+                    new ItemMap(zone, itemId, quantity, this.location.x + 6,
+                            zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
         }
         Service.gI().dropItemMap(this.zone, new ItemMap(zone, 1710, Util.nextInt(1, 3), this.location.x + 6, zone.map.yPhysicInTop(this.location.x, this.location.y - 24), pl.id));
 
